@@ -1,0 +1,29 @@
+body{
+    /* background-color: #2a8ede; */
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.mycontainer{
+    /* background-color: blue; */
+    border: 2px solid white;
+    padding: 20px;
+    margin: 50px;
+    border-radius:20px;
+    width: 50%;
+}
+.mymain{
+    /* background-color: #2a8ede; */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+
+
+}
+
+
+
+
+/* <!-- HTML !-->
+<button class="button-32" role="button">Button 32</button> */
+
+/* CSS */
