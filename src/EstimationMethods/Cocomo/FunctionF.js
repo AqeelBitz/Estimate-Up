@@ -81,13 +81,13 @@ const FunctionF = () => {
                     <h3 style={{ fontWeight: 'bold', color: 'aqua', textDecoration: 'underline' }} >Step-01</h3>
                 </div><br />
                 <div>
-                    <table style={{ borderColor: "#ff00ff" }}>
+                    <table >
                         <tr>
-                            <th>S.NO</th>
-                            <th>Function Types</th>
-                            <th>Simple</th>
-                            <th>Average</th>
-                            <th>Complex</th>
+                            <th >S.NO</th>
+                            <th >Function Types</th>
+                            <th >Simple</th>
+                            <th >Average</th>
+                            <th >Complex</th>
                         </tr>
                         <tr>
                             <td>1</td>
