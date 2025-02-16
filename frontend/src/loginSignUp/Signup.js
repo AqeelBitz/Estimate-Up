@@ -58,7 +58,7 @@ const Signup = () => {
     e.preventDefault();
     const { fname, lname, email, password } = user;
     if (Validation()) {
-      const res = await fetch("http://localhost:5000/register", {
+      const res = await fetch("https://estimate-up.onrender.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
