@@ -1,9 +1,11 @@
 const mongoose = require("mongoose")
-const DB = 'mongodb+srv://muhammad_aqeel:mallah1701094@cluster0.gagvshm.mongodb.net/mydb?retryWrites=true&w=majority'
+const DB = process.env.DATABASE  
 
 mongoose.connect(DB,{
     useNewUrlParser: true,
     useUnifiedTopology:true,
+    
+
     
 }).then(()=>{
     console.log("connection successful!")

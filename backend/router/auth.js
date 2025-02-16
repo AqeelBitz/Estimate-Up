@@ -1,65 +1,81 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 
+const authenticate = require('../middleware/authenticate');
+require("../db/conn");
+const User = require("../model/userSchema");
 
-require("../db/conn")
-const User = require("../model/userSchema")
-router.get('/', (req, res)=>{
-    res.send("hello from server router")
-})
+router.get('/', authenticate, (req,res)=>{
+    // console.log("hello from home");
+    res.send(req.rootUser);
+});
 
 router.post('/register', async(req, res)=>{
     const {fname, lname , email, password} = req.body;
    
     if(!fname|| !lname || !email|| !password){
-        return res.status(422).json({err: "fill the form properly"})
+        return res.status(422).json({err: "fill the form properly"});
     }
-    User.findOne({email:email})
-.then((userExit)=>{
-    if(userExit){
-        return res.status(422).json({err: "User Already Exist"})
+    
+    try {
+        const userExist = await User.findOne({email:email});
+        if(userExist){
+            return res.status(422).json({err: "User Already Exist"});
+        }
+
+        const user = new User({fname, lname , email, password});
+        await user.save();
+        res.status(201).json({message:"User Registered Successfully!"});
+    } catch(err) {
+        res.status(500).json({error: "Failed to Register!"});
     }
-
-    const user = new User({fname, lname , email, password})
-    user.save().then(()=>{
-        res.status(201).json({message:"User Registered Successfully!"})
-    }).catch((err)=>{
-        res.status(500).json({error: "Failed to Register!"})
-
-    }).catch(err => {console.log(err)})
-})
-
-    // res.json({message: req.body});
-    // res.send("mera register page")
-})
+});
 
 router.post('/sign-in', async (req,res)=>{
     try{
         const {email, password} = req.body;
 
         if(!email || !password){
-            return res.status(400).json({error: "please fill the data"})
+            return res.status(400).json({error: "please fill the data"});
         }
-        const userLogin = await User.findOne({email:email})
-        // console.log(userLogin)
-        if(userLogin){
-            const isMatch = await bcrypt.compare(password, userLogin.password)
+        
+        const userLogin = await User.findOne({email:email});
 
+        if(userLogin){           
+            const isMatch = await bcrypt.compare(password, userLogin.password);
+            const token = await userLogin.generateAuthToken();
+            
             if(!isMatch){
-                res.status(400).json({error: "Invalid Credentials"})
+                res.status(400).json({error: "Invalid Credentials"});
+            } else{
+                res.cookie("jwtoken", token, {
+                    expires:new Date(Date.now() + 25892000000),
+                    httpOnly:true 
+                });
+                res.json({message: "User Signin Successfully!", token});
             }
-            else{
-                res.json({message: "User Signin Successfully!"})
-            }
+        } else{
+            res.status(400).json({error: "Invalid Credentials!"});
         }
-        else{
-            res.status(400).json({error: "Invalid Credentials!"})
-        }
-    }catch(err){
+    } catch(err){
         console.log(err);
     }
-})
+});
 
+router.get('/api/logout', async (req,res)=>{
+    try {
+        req.rootUser.tokens = req.rootUser.tokens.filter((token) => {
+            return token.token !== req.token;
+        });
 
-module.exports = router
+        res.clearCookie('jwtoken', {path: '/'});
+        await req.rootUser.save();
+        res.send("User Logged out");
+    } catch(err) {
+        res.status(500).json({error: "Failed to Logout!"});
+    }
+});
+
+module.exports = router;

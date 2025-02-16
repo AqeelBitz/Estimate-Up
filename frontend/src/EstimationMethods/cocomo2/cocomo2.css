@@ -1,0 +1,214 @@
+.cocomo2_col{
+    border: 2px solid white;
+    background-color: #f2f2f2;
+    margin: 5px;
+    padding: 10px;
+}
+.cocomo_container{
+    max-width: 100%;
+}
+.functionalPoint{
+ 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.functionalPoint> label{
+    width: 50%;
+    text-align: left;
+}
+.functionalPoint> div{
+    
+    /* height: 20px; */
+    /* background-color: rgb(18, 170, 109); */
+    margin: 1px;
+}
+.leftColoumn{
+    display: flex;
+    flex-direction: column;
+
+}
+.leftColumnTable{
+ 
+ 
+ margin: 2px;
+ /* border: 2px solid red; */
+
+}
+.functionalPoint> div > input{
+    
+    width: 8em;
+}
+.functionalPoint> div > label{
+    
+    width: 15em;
+}
+.flex-item {
+ 
+    /* display: flex; */
+    /* padding: 5px  */
+
+}
+.flex-item > label{
+    text-align: left;
+}
+.Insideflex-item>label{
+    text-align: left;
+}
+/* .mybtn{
+    background-color: aqua;
+} */
+
+
+.mybtn {
+/* transition-duration: 0.4s;
+background-color: #0000FF; /* Blue */
+/* border: none;
+color: white;
+width: 100px;
+height: 40px;  */
+/* padding: 20px 32px; */
+/* text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 18px; */
+}
+
+.mybtn:hover {
+background-color: #09095c; /* Green */
+color: white;
+}
+
+/* <!-- HTML !-->
+<button class="button-81" role="button">Button 81</button> */
+
+/* CSS */
+/* .button-81 {
+    margin-top: 10px;
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-81:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+} */
+.col.functionalPoint,.col.leftColoumn, .col.last3 {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    /* background-color: #009933; */
+    padding: 10px;
+    border-radius: 7px;
+    text-align: center;
+  }
+  
+  .flex-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    align-items: center;
+  }
+  
+  label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+.cocomo2_input {
+    width: 40px;
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  /* button {
+    background-color: #009933;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+  } */
+  
+  h4 {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  .cocomo2_heading {
+    background: linear-gradient(to right, #F2994A, #F2C94C);
+    border-radius: 7px;
+    color: #fff;
+    /* display: inline-block; */
+    font-size: 1.5em;
+    padding: 10px 20px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #333;
+  }
+  .fpBtn {
+    line-height: 1;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .fpBtn:hover {
+    background-color: #3e8e41;
+  }
+  .t_name{
+    /* font-size: 3em; */
+    text-align: center;
+    /* margin: 0.5em 0; */
+    color: #333;
+    text-shadow: 2px 2px 2px #ccc;
+    background-color: #EEE;
+    padding: 5px;
+    /* border-radius: 25px; */
+    box-shadow: 2px 2px 5px #999;
+  }

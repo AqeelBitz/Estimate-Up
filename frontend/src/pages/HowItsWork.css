@@ -1,0 +1,48 @@
+/* Styles for HowItWorks page */
+.how-it-works-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .how-it-works-steps {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .how-it-works-step {
+    flex: 1;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .how-it-works-step-number {
+    background-color: #005eb8;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .how-it-works-step-description {
+    margin-left: 20px;
+  }
+  
+  .how-it-works-step-description h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .how-it-works-step-description p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #60d794;
+  }
+  
