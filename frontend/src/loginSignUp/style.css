@@ -1,7 +1,7 @@
 body{
     /* background-color: #2a8ede; */
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: black;
+    /* background-color: black; */
 
 }
 .mycontainer{
@@ -61,6 +61,12 @@ body{
     height: auto;
   }
   
+  @media (max-width: 575px) {
+    .custom-container {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+}
 
 
 

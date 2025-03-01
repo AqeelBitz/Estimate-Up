@@ -80,6 +80,7 @@ export const SocialMediaWrapper = styled.div`
 
   @media screen and (max-width: 820px) {
     flex-direction: column;
+    margin: 38vw auto 0px; /* Update margin for mobile */
   }
 `;
 

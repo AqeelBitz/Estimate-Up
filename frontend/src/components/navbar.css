@@ -2,6 +2,7 @@
   background-color: #0e2439;
   color: white;
   font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
@@ -9,7 +10,9 @@
 }
 
 .navbar-nav {
-  margin-left: auto;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .nav-link {
@@ -21,27 +24,37 @@
   color: #ffc107;
 }
 
-.navbar-toggler {
-  border-color: #ffc107;
-}
-
-.navbar-toggler-icon {
-  background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3e%3cpath stroke="%23ffc107" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e');
-}
-
+/* Button styles */
 .mysubmit {
   background-color: #ffc107;
+  width: 8rem;
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 .mysubmit:hover,
 .mysubmit:focus {
   background-color: #fcb700;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+
+
+.signup-btn {
+  background-color: #28a745;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover,
+.signup-btn:focus {
+  background-color: #218838;
+}
+
+/* Hover underline animation */
 .hover-underline-animation {
   position: relative;
 }
@@ -62,6 +75,40 @@
   transform: scaleX(1);
 }
 
+/* Active nav link style */
 .myNavbar .nav-link.active {
   color: #ffc107;
+}
+
+/* Right-aligned nav items (Login, Sign Up, Logout) */
+.right-nav-items {
+  margin-left: auto; /* Push to the right */
+  display: flex; /* To arrange buttons horizontally */
+  align-items: center; /* Vertically align buttons */
+}
+
+.right-nav-items .nav-item {
+  margin-left: 10px; /* Add some space between buttons */
+}
+
+/* Responsive navbar adjustments */
+@media (max-width: 768px) {
+  .mysubmit {
+    padding: 0.5rem 1rem;
+  }
+
+  /* Stack items vertically on mobile */
+  .right-nav-items {
+    margin-left: 0;
+    flex-direction: column; /* Stack buttons vertically on small screens */
+  }
+}
+.navbar-toggler{
+  background-color: white;
+}
+
+@media (min-width: 769px) {
+  .mysubmit {
+      display: none !important;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import signin_img from '../images/signin.jpg';
@@ -11,6 +11,22 @@ const Login = ({ setIsAuthenticated }) => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
+  useEffect(() => {
+    const toggleImageVisibility = () => {
+        const image = document.getElementById('img_container');
+        if (image) {
+            image.style.display = window.innerWidth <= 768 ? 'none' : 'block';
+        }
+    };
+
+    toggleImageVisibility(); // Run on mount
+    window.addEventListener('resize', toggleImageVisibility);
+
+    return () => {
+        window.removeEventListener('resize', toggleImageVisibility);
+    };
+}, []);
 
   function Validation(e) {
     let result = true;
@@ -58,6 +74,7 @@ const Login = ({ setIsAuthenticated }) => {
   }
 
   return (
+    <div className='custom-container'>
     <div className="container">
       <div className="row d-flex justify-content-center align-items-center">
         <div className="col-md-5 col-lg-5 col-xl-4 my-5">
@@ -100,10 +117,11 @@ const Login = ({ setIsAuthenticated }) => {
           </div>
         </div>
 
-        <div className="col-md-6 col-lg-7 col-xl-8 order-md-first img_container">
-          <img src={signin_img} className="img-fluid" alt="Sample image" style={{height:'100vh', objectFit: 'cover'}} />
+        <div className="col-md-6 col-lg-7 col-xl-8 order-md-first img_container" id='img_container'>
+          <img src={signin_img} className="img-fluid" alt="Sample image" style={{height:'80vh', objectFit: 'contain'}} />
         </div>
       </div>
+    </div>
     </div>
   );
 };

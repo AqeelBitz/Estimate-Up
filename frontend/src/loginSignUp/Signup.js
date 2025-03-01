@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import './style.css'
 import { toast, ToastContainer } from 'react-toastify'
@@ -11,6 +11,22 @@ const Signup = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState({ fname: "", lname: "", email: "", password: "" })
   const [err, setError] = useState(false)
+
+  useEffect(() => {
+    const toggleImageVisibility = () => {
+        const image = document.getElementById('img_container');
+        if (image) {
+            image.style.display = window.innerWidth <= 768 ? 'none' : 'block';
+        }
+    };
+
+    toggleImageVisibility(); // Run on mount
+    window.addEventListener('resize', toggleImageVisibility);
+
+    return () => {
+        window.removeEventListener('resize', toggleImageVisibility);
+    };
+}, []);
 
   let name, value;
 
@@ -83,6 +99,7 @@ const Signup = () => {
     }
   }
   return (
+    <div className='custom-container'>
     <div className="container">
     <div className="row align-items-center">
       <div className="col-md-5 col-lg-5 col-xl-4 my-5 border border-secondary rounded p-3 my-container">
@@ -119,12 +136,13 @@ const Signup = () => {
         </form>
       </div>
   
-      <div className="col-md-6 col-lg-7 col-xl-8 order-md-first img_container">
-        <img src={signup_img} className="img-fluid" alt="Sample image" style={{height:'100vh', objectFit: 'cover'}} />
+      <div className="col-md-6 col-lg-7 col-xl-8 order-md-first img_container" id='img_container'>
+        <img src={signup_img} className="img-fluid" alt="Sample image" style={{height:'80vh', objectFit: 'contain'}} />
       </div>
     </div>
   
     <ToastContainer />
+  </div>
   </div>
   
   
