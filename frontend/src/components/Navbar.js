@@ -41,13 +41,13 @@ const Navbar = ({ isAuthenticated, handleLogout }) => {
                     <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`}>
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active text-light" to="/" onClick={closeNavbar}>Home</Link>
+                                <Link className="nav-link active text-light hover-underline-animation" to="/" onClick={closeNavbar}>Home</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active text-light" to="about" onClick={closeNavbar}>About</Link>
+                                <Link className="nav-link active text-light hover-underline-animation" to="about" onClick={closeNavbar}>About</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active text-light" to="service" onClick={closeNavbar}>Services</Link>
+                                <Link className="nav-link active text-light hover-underline-animation" to="service" onClick={closeNavbar}>Services</Link>
                             </li>
                             {isAuthenticated ? (
                                 <li className="nav-item">
