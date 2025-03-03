@@ -7,7 +7,7 @@ export const CoverContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 30px;
-  height: 800px;
+  height: 100vh;
   position: relative;
   z-index: 1;
 
@@ -27,8 +27,6 @@ export const CoverContainer = styled.div`
 export const CoverBg = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -38,7 +36,6 @@ export const CoverBg = styled.div`
 export const VideoBg = styled.video`
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
   object-fit: cover;
   background: #232a34;
 `;
@@ -47,21 +44,22 @@ export const CoverContent = styled.div`
   z-index: 3;
   max-width: 1200px;
   position: absolute;
-  padding: 8px 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 `;
 
 export const CoverH1 = styled.h1`
   color: #fff;
-  font-size: 48px;
+  font-size: 56px;
   text-align: center;
 
   @media screen and (max-width: 768px) {
-    font-size: 40px;
+    font-size: 44px;
   }
-  
+
   @media screen and (max-width: 480px) {
     font-size: 32px;
   }
@@ -70,12 +68,11 @@ export const CoverH1 = styled.h1`
 export const CoverP = styled.p`
   margin-top: 24px;
   color: #fff;
-  font-size: 24px;
-  text-align: center;
+  font-size: 22px;
   max-width: 600px;
 
   @media screen and (max-width: 768px) {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   @media screen and (max-width: 480px) {
@@ -86,8 +83,27 @@ export const CoverP = styled.p`
 export const CoverBtnWrapper = styled.div`
   margin-top: 32px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+`;
+
+export const Button = styled.a`
+  border-radius: 50px;
+  background: #01bf71;
+  white-space: nowrap;
+  padding: 14px 48px;
+  color: #fff;
+  font-size: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    background: #fff;
+    color: #010606;
+    transition: all 0.3s ease-in-out;
+  }
 `;
 
 export const ArrowForward = styled(MdArrowForward)`

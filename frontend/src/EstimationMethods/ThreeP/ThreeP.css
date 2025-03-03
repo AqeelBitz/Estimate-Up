@@ -137,6 +137,14 @@
   --font-family: Arial, sans-serif;
 }
 
+.tp_task-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 0% 1% 0% 1%;
+  }
+
+
 /* General styles */
 * {
   box-sizing: border-box;
@@ -203,7 +211,53 @@ h1 {
   background-color: var(--color-error-dark);
 }
 
-.subtask-container {
+.subtask {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+  margin: 0% 0% 1% 0%;
+  padding-right: 2%;
+}
+
+.subtask div {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.subtask input[type="number"] {
+  font-size: 16px;
+  padding: 2px 1px 2px 2px;
+  border: 1px solid var(--color-gray);
+  border-radius: 5px;
+  width: 100%; /* Adjust width dynamically */
+  min-width: 50px;
+}
+
+.subtask button {
+  border: none;
+  background-color: transparent;
+  color: #dd1a45;
+  font-size: 18px;
+  padding: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subtask button:hover {
+  color: #be183c;
+}
+
+.subtask button i {
+  font-size: 18px;
+}
+
+
+/* .subtask-container {
   margin-bottom: 16px;
 }
 
@@ -235,7 +289,7 @@ h1 {
 
 .subtask button:hover {
   background-color: #be183c;
-}
+} */
 
 /* .total-container {
   display: flex;
@@ -293,8 +347,8 @@ h1 {
     background-color: #0daf0f;
     color: #fff;
     border-radius: 5px;
-    padding: 0px 10px 0px 10px;
-    /* width: 100%; */
+    padding: 2px 10px 2px 10px;
+    margin: 2% 0% 3% 0%;
     margin-left: auto;
     /* height: 46px; */
     border: none;
@@ -360,6 +414,7 @@ h1 {
       justify-content: space-between;
       align-items: center;
       margin-top: 20px;
+      margin: 0% 2% 1% 2%;
     }
     
     .cal_est_btn {
@@ -393,3 +448,8 @@ h1 {
       background-color: #c0c0c0;
     }
     
+    .fact{
+      background-color: #aaaa06f7;
+      width: 100%;
+      color: white;
+    }

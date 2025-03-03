@@ -19,7 +19,7 @@
     border: 1.4px solid black;
     padding: 10px 0px 10px 0px;
     border-radius: 15px;
-    width: 150px;
+    width: 20vw;
     margin-left: 5px;
     font-weight: bolder;
     transition: all 0.3s ease-in-out;
@@ -214,16 +214,18 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .card-wrapper {
-    /* background-color: rgb(216, 216, 204); */
+    background-color: rgb(245 247 246 / 52%);
     text-overflow: ellipsis;
     width: 245px;
     height: 200px;
     box-shadow: -15px 12px 19px -6px rgb(134 131 131 / 34%) !important;
-    display: flex;
+    display: flex
+;
     flex-direction: column;
     border-radius: 15px;
     margin: 2px;
-  }
+    border: 1px solid #e5e5ee;
+}
   
   .card-wrapper::-webkit-scrollbar {
     width: 0px;
@@ -284,6 +286,9 @@
   }
   
   .card-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
     overflow: auto;
     height: 100px;
     padding: 0px 8px 0px 8px;

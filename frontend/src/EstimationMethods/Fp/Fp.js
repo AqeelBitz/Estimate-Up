@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-
+import './fp.css'
 const FunctionF = () => {
 
     function UFP() {
@@ -135,12 +135,12 @@ const FunctionF = () => {
                 <br />
                 <br />
                 <div style={{ color: 'green' }}>
-                    --Read the above table.Choose the appropriate weighting factor (i.e.simple,complex or average) and fill its S.no iin the box,and then fill in the function types--
+                    --Read the above table.Choose the appropriate weighting factor (i.e.simple,complex or average) and fill its S.no in the box,and then fill in the function types--
 
                 </div>
 
 
-                <div className="fact"><strong><h3>
+                <div className=""><strong><h3>
                     <table className="fact">
                         <tr>
                             <th>1. Simple</th>
@@ -158,20 +158,19 @@ const FunctionF = () => {
 
                 <div >
                     <p className='Adjusting'>
-                        <strong>Number of User Inputs:</strong>
-                        <input type="text" id="in" placeholder="user inputs" />
+                        <input type="text" id="in" placeholder="Number of User Inputs" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of User Outputs:</strong> <input type="text" id="out" placeholder="user outputs" />
+                        <input type="text" id="out" placeholder="Number of User Outputs" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of Inquiries:</strong> <input type="text" id="inq" placeholder="inquiries" />
+                        <input type="text" id="inq" placeholder="Number of Inquiries" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of Files:</strong> <input type="text" id="files" placeholder="files" />
+                        <input type="text" id="files" placeholder="Number of Files" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of External Interfaces:</strong>  <input type="text" id="ext_int" placeholder="external interfaces" />
+                        <input type="text" id="ext_int" placeholder="Number of External Interfaces" />
                     </p>
                 </div><br />
                 <button className="button-43" role="button" onClick={UFP}> click me to get UFP</button>

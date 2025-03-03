@@ -45,34 +45,43 @@ const Sloc = () => {
           <small className="form-text text-muted">
             **The language factors used for the calculation are taken on the basis of average value.
           </small>
-          <div className="sloc-buttons">
+          <div className="sloc-buttons" style={{display:'flex', justifyContent: 'space-evenly',alignItems: 'baseline'}}>
             <div className="col-sm-5">
-              <button className=" mr-3 align-self-center sloc_btn" type="submit" onClick={calc}>
+              <button className=" mr-3 align-self-center sloc_btn" type="button" onClick={calc}>
                 Calculate SLOC
               </button>
             </div>
             <div className="col-sm-5">
-              <input type="text" id="result_sloc" className="form-control  sloc_input" readOnly />
+              <input type="text" id="result_sloc" className="form-control " readOnly />
             </div>
           </div>
 
           <div className="nav-buttons">
-            <Link to="/cocomo" className="btn btn-danger mr-2">
-              <i className="fas fa-arrow-left mr-2"></i>Go Back
-            </Link>
-            <Link to="/estimate" className="btn btn-primary mr-3">
-              Estimate Effort, Time, Cost
-              <i className="fas fa-arrow-right ml-3"></i>
-            </Link>
+            <div className='btn-box'>
+              <div>
+                <Link to="/cocomo" className="btn btn-danger" style={{ display: 'flex' }}>
+                  <div>
+                    <i className="fas fa-arrow-left"></i>
+                  </div>
+                  <div>
+                    Go Back
+                  </div>
+                </Link>
+              </div>
+              <div>
+                <Link to="/estimate" className="btn btn-primary" style={{ display: 'flex' }}>
+                  <div>
+                    Estimate Effort, Time, Cost
+                  </div>
+                  <div>
+                    <i className="fas fa-arrow-right"></i>
+                  </div>
+                </Link>
+              </div>
+            </div>
           </div>
 
         </div>
-
-
-
-
-
-
       </form>
     </div>
   );

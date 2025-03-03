@@ -13,17 +13,17 @@ const Cocomo = () => {
           <ul>
             <li>The COCOMO-I can perform the following functionalities:-</li>
             <li>
-              <Link to="/function">
+              <Link to="/function" style={{textDecoration:'none'}}>
                 <button class="button-43" role="button">CALCULATION OF FUNCTION POINT</button>
               </Link>
             </li>
             <li>
-              <Link to="/sloc">
+              <Link to="/sloc" style={{textDecoration:'none'}}>
                 <button class="button-43" role="button">CALCULATION OF SOURCE LINES OF CODES(SLOC)</button>
               </Link>
             </li>
             <li>
-              <Link to="/estimate">
+              <Link to="/estimate" style={{textDecoration:'none'}}>
                 <button class="button-43" role="button">ESTIMATION OF EFFORT,DEVELOPEMENT TIME AND COST</button>
               </Link>
             </li>

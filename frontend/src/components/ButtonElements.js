@@ -14,10 +14,19 @@ export const Button = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  pointer-events: auto; /* Ensures button remains clickable */
 
   &:hover {
-    transition: all 0.2s ease-in-out;
     background: ${({ primary }) => (primary ? '#fff' : '#01BF71')};
+    color: ${({ primary }) => (primary ? '#010606' : '#fff')};
   }
 `;
+
+// Default Props (Optional)
+Button.defaultProps = {
+  primary: false,
+  dark: false,
+  big: false,
+  fontBig: false,
+};

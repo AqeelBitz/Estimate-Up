@@ -43,39 +43,39 @@ const FunctionF = () => {
 
     function func() {
         const questions = [
-          "Does the system require reliable backup and recovery?",
-          "Are data communications required?",
-          "Are there distributed processing functions?",
-          "Is performance critical?",
-          "Will the system run in an existing, heavily utilized operational environment?",
-          "Does the system require online data entry?",
-          "Does the online data entry require the input transaction to be built over multiple screens or operations?",
-          "Are the inputs, outputs, files, or inquiries complex?",
-          "Are the master files updated?",
-          "Is the internal processing complex?",
-          "Is the code designed to be reusable?",
-          "Are conversion and installation included in the design?",
-          "Is the system designed for multiple installations in different organizations?",
-          "Is the application designed to facilitate change and ease of use by users?"
+            "Does the system require reliable backup and recovery?",
+            "Are data communications required?",
+            "Are there distributed processing functions?",
+            "Is performance critical?",
+            "Will the system run in an existing, heavily utilized operational environment?",
+            "Does the system require online data entry?",
+            "Does the online data entry require the input transaction to be built over multiple screens or operations?",
+            "Are the inputs, outputs, files, or inquiries complex?",
+            "Are the master files updated?",
+            "Is the internal processing complex?",
+            "Is the code designed to be reusable?",
+            "Are conversion and installation included in the design?",
+            "Is the system designed for multiple installations in different organizations?",
+            "Is the application designed to facilitate change and ease of use by users?"
         ];
-      
+
         var sum = 0;
-      
+
         for (var i = 0; i < questions.length; i++) {
-          var count = i + 1;
-          var value = Number(prompt(`[${count}/15] ${questions[i]} (0-5)`));
-      
-          if (isNaN(value) || value < 0 || value > 5) {
-            alert("Please enter a value between 0 and 5 for each question.");
-            return;
-          }
-      
-          sum += value;
+            var count = i + 1;
+            var value = Number(prompt(`[${count}/15] ${questions[i]} (0-5)`));
+
+            if (isNaN(value) || value < 0 || value > 5) {
+                alert("Please enter a value between 0 and 5 for each question.");
+                return;
+            }
+
+            sum += value;
         }
-      
+
         document.getElementById("res").value = sum;
-      }
-      
+    }
+
 
 
     function getffp() {
@@ -171,20 +171,19 @@ const FunctionF = () => {
 
                 <div >
                     <p className='Adjusting'>
-                        <strong>Number of User Inputs:</strong>
-                        <input type="text" id="in" placeholder="user inputs" />
+                        <input type="text" id="in" placeholder="Number of User Inputs" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of User Outputs:</strong> <input type="text" id="out" placeholder="user outputs" />
+                        <input type="text" id="out" placeholder="Number of User Outputs" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of Inquiries:</strong> <input type="text" id="inq" placeholder="inquiries" />
+                        <input type="text" id="inq" placeholder="Number of Inquiries" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of Files:</strong> <input type="text" id="files" placeholder="files" />
+                        <input type="text" id="files" placeholder="Number of Files" />
                     </p>
                     <p className='Adjusting'>
-                        <strong>Number of External Interfaces:</strong>  <input type="text" id="ext_int" placeholder="external interfaces" />
+                        <input type="text" id="ext_int" placeholder="Number of External Interfaces" />
                     </p>
                 </div><br />
                 <button className="button-43" role="button" onClick={UFP}> click me to get UFP</button>
@@ -216,16 +215,31 @@ const FunctionF = () => {
                     </p>
                 </div>
                 <button className="button-43" role="button" onClick={getffp} >CALCULATE FP</button><br />
-                <br /><input type="text" id="F_P" placeholder="FP is " />
+                <br /><input type="text" id="F_P" placeholder="FP is " readOnly/>
                 <br /><br />
             </div>
-            <Link to="/cocomo" className="btn btn-danger mr-2">
-                <i className="fas fa-arrow-left mr-2"></i>Go Back
-            </Link>
-            <Link to="/sloc" className="btn btn-primary mr-3">
-            Source Lines of Code 
-            <i className="fas fa-arrow-right ml-3"></i>
-          </Link>
+            <div className='btn-box'>
+                <div>
+                    <Link to="/cocomo" className="btn btn-danger" style={{display:'flex'}}>
+                        <div>
+                            <i className="fas fa-arrow-left"></i>
+                        </div>
+                        <div>
+                            Go Back
+                        </div>
+                    </Link>
+                </div>
+                <div>
+                    <Link to="/sloc" className="btn btn-primary" style={{display:'flex'}}>
+                        <div>
+                            Source Lines of Code
+                        </div>
+                        <div>
+                            <i className="fas fa-arrow-right"></i>
+                        </div>
+                    </Link>
+                </div>
+            </div>
 
         </div>
     )

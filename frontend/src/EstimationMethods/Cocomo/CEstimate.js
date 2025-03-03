@@ -106,11 +106,12 @@ const CEstimate = () => {
         <div>
             <div className="main">
                 <h1 className="est t_name ">Estimation of Cost,Effort,Time of development of Software</h1>
+
+                <div className='item_container '>
                 Write SLOC:
                 <input type="text" id="sloc" name="sloc" required />
                 <button className="btn btn-primary" onClick={clicks}>GET KLOC</button>
                 KLOC=<input type="text" id="kloc" />
-                <div className='item_container '>
                     <h3 style={{ backgroundColor: '#7e74b4', color: 'white', padding: '5px', fontWeight: 'bold', borderRadius: '15px' }}>Software Cost Drivers</h3>
                     <div className='separate_item'>
                         <strong>Product:</strong>
@@ -339,7 +340,7 @@ const CEstimate = () => {
                             <button className="mf_btn" onClick={hey}>calculate mf</button>
                         </div>
                         <div className="col-sm-5">
-                            <input className="form-control mf_input" type="text" id="haha" readOnly />
+                            <input className="form-control" type="text" id="haha" readOnly />
                         </div>
                     </div>
 

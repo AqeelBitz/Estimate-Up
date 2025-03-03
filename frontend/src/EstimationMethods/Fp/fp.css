@@ -1,0 +1,138 @@
+/* General container styling */
+.main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* Responsive table */
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .data-table th {
+    background-color: #3f4044e8;
+    color: aqua;
+  }
+  
+  @media (max-width: 768px) {
+    .data-table th,
+    .data-table td {
+      font-size: 14px;
+      padding: 5px;
+    }
+  }
+  
+  /* Responsive Inputs */
+  .Adjusting {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .Adjusting input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  @media (min-width: 600px) {
+    .Adjusting {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .Adjusting strong {
+      min-width: 180px;
+    }
+  
+    .Adjusting input {
+      flex-grow: 1;
+    }
+  }
+  
+  /* Buttons */
+  .button-43 {
+    background-image: linear-gradient(-180deg, #37aee2, #1e96c8);
+    border: 0;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: center;
+    margin: 4px;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    width: 101%;
+}
+  .button-43:hover{
+    background-image: linear-gradient(-180deg, #2b8bb4, #176d93);
+  }
+  @media (min-width: 600px) {
+    .button-43 {
+      width: auto;
+    }
+  }
+  
+  /* Responsive Headers */
+  .t_name {
+    font-size: 22px;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .t_name {
+      font-size: 18px;
+    }
+  }
+  
+  /* Step headings */
+  .step-heading {
+    font-weight: bold;
+    color: aqua;
+    background-color: #3f4044e8;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 50%;
+    margin: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .step-heading {
+      width: 80%;
+      font-size: 16px;
+    }
+  }
+  
+  /* Inputs inside calculation sections */
+  .fact input {
+    width: 100%;
+    max-width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 600px) {
+    .fact input {
+      max-width: 100%;
+    }
+  }
+  

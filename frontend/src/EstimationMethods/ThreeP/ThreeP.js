@@ -71,77 +71,88 @@ function ThreeP() {
   };
 
   return (
-    <div>
-    <h1 className='t_name'>Three-Point Estimation Technique</h1>
-    <div className="tp-estimation">
-    <div className="tp_task-container">
-      {tasks.map((task, index) => (
-        <div key={index} className="task">
-          <div className="task-header">
-            <input
-              type="text"
-              placeholder="Task name"
-              value={task.name}
-              onChange={(event) => handleTaskChange(index, event)}
-            />
-            <button onClick={() => deleteTask(index)}>Delete</button>
-          </div>
-          <div className="subtask-container">
-            {task.subtasks.map((subtask, subtaskIndex) => (
-              <div key={subtaskIndex} className="subtask">
-                <label for="Optimistic"></label>
-                <input
-                  type="number"
-                  placeholder="Optimistic"
-                  value={subtask.optimistic}
-                  onChange={(event) =>
-                    handleSubtaskChange(index, subtaskIndex, 'optimistic', event)
-                  }
-                />
-                <label for="Most Likely"></label>
-                <input
-                  type="number"
-                  placeholder="Most Likely"
-                  value={subtask.mostLikely}
-                  onChange={(event) =>
-                    handleSubtaskChange(index, subtaskIndex, 'mostLikely', event)
-                  }
-                />
-                <label for="Pessimistic"></label>
-                <input
-                  type="number"
-                  placeholder="Pessimistic"
-                  value={subtask.pessimistic}
-                  onChange={(event) =>
-                    handleSubtaskChange(index, subtaskIndex, 'pessimistic', event)
-                  }
-                />
-                <button onClick={() => deleteSubtask(index, subtaskIndex)}>Delete</button>
+    <div style={{ backgroundColor: 'white', minHeight: '89vh' }}>
+      <h1 className='t_name'>Three-Point Estimation</h1>
+      <div className="tp-estimation">
+        <div className="tp_task-container">
+          {tasks.map((task, index) => (
+            <div key={index} className="task">
+              <div className="task-header">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Task name"
+                    value={task.name}
+                    onChange={(event) => handleTaskChange(index, event)}
+                  />
+                </div>
+                <div>
+                  <button onClick={() => deleteTask(index)}>Delete</button>
+                </div>
               </div>
-            ))}
-            <button className='st_btn' onClick={() => addSubtask(index)}>Add Subtask +</button>
+              <div className="subtask-container">
+                {task.subtasks.map((subtask, subtaskIndex) => (
+                  <div key={subtaskIndex} className="subtask">
+                    <div>
+                      <input
+                        type="number"
+                        placeholder="Optimistic"
+                        value={subtask.optimistic}
+                        onChange={(event) =>
+                          handleSubtaskChange(index, subtaskIndex, 'optimistic', event)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="number"
+                        placeholder="Most Likely"
+                        value={subtask.mostLikely}
+                        onChange={(event) =>
+                          handleSubtaskChange(index, subtaskIndex, 'mostLikely', event)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="number"
+                        placeholder="Pessimistic"
+                        value={subtask.pessimistic}
+                        onChange={(event) =>
+                          handleSubtaskChange(index, subtaskIndex, 'pessimistic', event)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <button onClick={() => deleteSubtask(index, subtaskIndex)}>
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+                <button className='st_btn' onClick={() => addSubtask(index)}>Add Subtask +</button>
+              </div>
+            </div>
+          ))}
+          <button className='t_btn' onClick={addTask}>Add Task +</button>
+        </div>
+        <div className="total-container">
+          <div className="total">
+            <div className="label">Total Tasks:</div>
+            <div className="value">{totalTasks}</div>
+          </div>
+          <div className="total">
+            <div className="label">Total Estimation:</div>
+            <div className="value">{totalEstimation.toFixed(2)}</div>
           </div>
         </div>
-      ))}
-      <button className='t_btn' onClick={addTask}>Add Task +</button>
-    </div>
-    <div className="total-container">
-      <div className="total">
-        <div className="label">Total Tasks:</div>
-        <div className="value">{totalTasks}</div>
-      </div>
-      <div className="total">
-        <div className="label">Total Estimation:</div>
-        <div className="value">{totalEstimation.toFixed(2)}</div>
+        <div className="button-container">
+          <button className='cal_est_btn' onClick={calculateEstimation}>Calculate Estimation</button>
+          <button className='res_est_btn' onClick={resetData}>Reset Data</button>
+        </div>
       </div>
     </div>
-    <div className="button-container">
-      <button className='cal_est_btn' onClick={calculateEstimation}>Calculate Estimation</button>
-      <button className='res_est_btn' onClick={resetData}>Reset Data</button>
-    </div>
-  </div>
- </div>
-  
+
 
   );
 }
