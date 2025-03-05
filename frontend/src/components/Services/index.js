@@ -16,35 +16,48 @@ const Services = () => {
       <ServicesH1>Our Services</ServicesH1>
       <ServicesWrapper>
 
-        <ServicesCard>
-          <ServicesIcon src={Icon2} />
-          <ServiceLink to='/tp'>Three Point</ServiceLink>
-          <ServicesP>Ensures that managers minimize exposure to loss, and it lessens the risk of wasted resources.</ServicesP>
-        </ServicesCard>
+        <ServiceLink to="/tp">
+          <ServicesCard>
+            <ServicesIcon src={Icon2} />
+            <ServiceLink to="/tp">Three Point</ServiceLink>
+            <ServicesP>
+              Ensures that managers minimize exposure to loss, and it lessens the risk of wasted resources.
+            </ServicesP>
+          </ServicesCard>
+        </ServiceLink>
 
-        <ServicesCard>
-          <ServicesIcon src={Icon2} />
-          <ServiceLink to='/fp'>Functional Point</ServiceLink>
-          <ServicesP>The process of sizing software based on the number of business functions. </ServicesP>
-        </ServicesCard>
+        <ServiceLink to='/fp'>
+          <ServicesCard>
+            <ServicesIcon src={Icon2} />
+            <ServiceLink to='/fp'>Functional Point</ServiceLink>
+            <ServicesP>The process of sizing software based on the number of business functions. </ServicesP>
+          </ServicesCard>
+        </ServiceLink>
 
-        <ServicesCard>
-          <ServicesIcon src={Icon2} />
-          <ServiceLink to='/cocomo'>Cocomo 1</ServiceLink>
-          <ServicesP>Predicts the efforts and schedule of a software product based on the size of the software.</ServicesP>
-        </ServicesCard>
+        <ServiceLink to='/cocomo'>
+          <ServicesCard>
+            <ServicesIcon src={Icon2} />
+            <ServiceLink to='/cocomo'>Cocomo 1</ServiceLink>
+            <ServicesP>Predicts the efforts and schedule of a software product based on the size of the software.</ServicesP>
+          </ServicesCard>
+        </ServiceLink>
 
-        <ServicesCard>
-          <ServicesIcon src={Icon2} />
-          <ServiceLink to='/cocomo2'>Cocomo 2</ServiceLink>
-          <ServicesP>Estimate the cost, effort and schedule.</ServicesP>
-        </ServicesCard>
 
-        <ServicesCard>
-          <ServicesIcon src={Icon2} />
-          <ServiceLink to='/delphi'>Delphi</ServiceLink>
-          <ServicesP>Estimate the likelihood and outcome of future events.</ServicesP>
-        </ServicesCard>
+        <ServiceLink to='/cocomo2'>
+          <ServicesCard>
+            <ServicesIcon src={Icon2} />
+            <ServiceLink to='/cocomo2'>Cocomo 2</ServiceLink>
+            <ServicesP>Estimate the cost, effort and schedule.</ServicesP>
+          </ServicesCard>
+        </ServiceLink>
+
+        <ServiceLink to='/delphi'>
+          <ServicesCard>
+            <ServicesIcon src={Icon2} />
+            <ServiceLink to='/delphi'>Delphi</ServiceLink>
+            <ServicesP>Estimate the likelihood and outcome of future events.</ServicesP>
+          </ServicesCard>
+        </ServiceLink>
 
       </ServicesWrapper>
     </ServicesContainer>
