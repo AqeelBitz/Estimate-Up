@@ -39,35 +39,39 @@ const Navbar = ({ isAuthenticated, handleLogout }) => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`}>
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li className="nav-item">
+                        <Link className="nav-link active text-light hover-underline-animation" to="/" onClick={closeNavbar}>Home</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link active text-light hover-underline-animation" to="about" onClick={closeNavbar}>About</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link active text-light hover-underline-animation" to="service" onClick={closeNavbar}>Services</Link>
+                    </li>
+                </ul>
+                
+                <ul className="navbar-nav right-nav-items">
+                    {isAuthenticated ? (
+                        <li className="nav-item">
+                            <button className="mysubmit" type="button" onClick={() => { handleLogout(); closeNavbar(); }}>Logout</button>
+                        </li>
+                    ) : (
+                        <>
                             <li className="nav-item">
-                                <Link className="nav-link active text-light hover-underline-animation" to="/" onClick={closeNavbar}>Home</Link>
+                                <Link to="/sign-in">
+                                    <button className="mysubmit login-btn" type="button" onClick={closeNavbar}>Login</button>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active text-light hover-underline-animation" to="about" onClick={closeNavbar}>About</Link>
+                                <Link to="/sign-up">
+                                    <button className="mysubmit signup-btn" type="button" onClick={closeNavbar}>Sign Up</button>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active text-light hover-underline-animation" to="service" onClick={closeNavbar}>Services</Link>
-                            </li>
-                            {isAuthenticated ? (
-                                <li className="nav-item">
-                                    <button className="mysubmit" type="button" onClick={() => { handleLogout(); closeNavbar(); }}>Logout</button>
-                                </li>
-                            ) : (
-                                <>
-                                    <li className="nav-item">
-                                        <Link to="/sign-in">
-                                            <button className="mysubmit login-btn" type="button" onClick={closeNavbar}>Login</button>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/sign-up">
-                                            <button className="mysubmit signup-btn" type="button" onClick={closeNavbar}>Sign Up</button>
-                                        </Link>
-                                    </li>
-                                </>
-                            )}
-                        </ul>
+                        </>
+                    )}
+                </ul>
+                
                     </div>
                 </div>
             </nav>

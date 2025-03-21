@@ -107,8 +107,15 @@
   background-color: #ffc107;
 }
 
-@media (min-width: 769px) {
+.right-nav-items {
+  margin-left: auto; /* Push the last three items to the right */
+  display: flex; /* Keep them aligned horizontally */
+  align-items: center;
+  gap: 10px; /* Add spacing between buttons */
+}
+
+/* @media (min-width: 769px) {
     .mysubmit {
         display: none !important;
     }
-}
+} */

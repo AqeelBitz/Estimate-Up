@@ -27,7 +27,7 @@ import InputRound3 from '../EstimationMethods/delphi/components/InputRound3';
 import Result from '../EstimationMethods/delphi/components/Result';
 
 const Router1 = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
