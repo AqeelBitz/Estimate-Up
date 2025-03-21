@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../images/my_logo.svg';
+import logo from '../images/my_logo.png';
 import './navbar.css';
 
 const Navbar = ({ isAuthenticated, handleLogout }) => {
