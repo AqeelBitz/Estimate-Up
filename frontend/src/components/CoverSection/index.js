@@ -17,11 +17,7 @@ const CoverSection = () => {
       <CoverContent>
         <CoverH1>Easier Estimation, More Savings</CoverH1>
         <CoverP>Sign up for a new account today and enjoy our awesome features.</CoverP>
-        <CoverBtnWrapper>
-          <Button href='/signup' onMouseEnter={onHover} onMouseLeave={onHover}>
-            Get Started {hover ? <ArrowForward /> : <ArrowRight />}
-          </Button>
-        </CoverBtnWrapper>
+
       </CoverContent>
     </CoverContainer>
   );

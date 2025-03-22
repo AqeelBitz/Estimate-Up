@@ -40,8 +40,8 @@ export const ServicesWrapper = styled.div`
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  align-items: stretch; /* Ensures equal height */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted for larger cards */
+  align-items: stretch;
   gap: 20px;
   padding: 0 20px;
 
@@ -51,53 +51,61 @@ export const ServicesWrapper = styled.div`
 `;
 
 export const ServicesCard = styled.div`
-  background: #fff;
+  width: 240px; /* Increased card width */
+  height: 320px; /* Increased card height */
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  border-radius: 20px;
+  transition: all 0.3s;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  height: 400px; /* Fixed height for uniformity */
-  width: 100%;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
   text-align: center;
 
   &:hover {
-    transform: scale(1.05);
+    box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
   }
+`;
 
-  @media screen and (max-width: 480px) {
-    height: 350px; /* Adjust for smaller screens */
-    padding: 15px;
+export const ServicesCardInner = styled.div`
+  width: 240px; /* Increased inner card width */
+  height: 320px; /* Increased inner card height */
+  background-color: #42565b; /* Updated background color */
+  border-radius: 20px;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  &:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
   }
 `;
 
 export const ServicesIcon = styled.img`
-  width: 140px;
-  height: 140px;
-  margin-bottom: 10px;
+  width: 120px; /* Increased image size */
+  height: 120px; /* Increased image size */
+  margin-bottom: 15px; /* Adjusted margin */
 `;
 
 export const ServicesH2 = styled.h2`
-  font-size: 1.2rem;
-  color: black;
+  font-size: 1.4rem; /* Increased font size */
+  color: white;
   margin-bottom: 10px;
-  flex-grow: 1; /* Ensures uniform alignment */
 `;
 
 export const ServicesP = styled.p`
-  font-size: 1rem;
-  text-align: center;
-  color: black;
-  flex-grow: 1;
+    font-weight: normal;
+    font-size: 0.8rem;
+    text-align: center;
+    color: white;
 `;
 
 export const ServiceLink = styled(Link)`
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  color: black;
+  font-size: 1.1rem; /* Increased font size */
+  color: white;
   text-decoration: none;
   font-weight: bold;
 

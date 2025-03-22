@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -12,7 +12,6 @@ import CEstimate from '../EstimationMethods/Cocomo/CEstimate';
 import Cocomo2 from '../EstimationMethods/cocomo2/Cocomo2';
 import Login from '../loginSignUp/Login';
 import Signup from '../loginSignUp/Signup';
-import MyForm from '../components/MyForm';
 import FunctionPoint from '../EstimationMethods/Fp/Fp';
 import ThreePoint from '../EstimationMethods/ThreeP/ThreeP';
 import Services from '../components/Services';
@@ -38,25 +37,32 @@ const Router1 = () => {
 
   const handleLogout = async () => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
 
     try {
-      const response = await fetch('/api/logout', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+        const response = await fetch('https://estimate-up.onrender.com/logout', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
 
-      if (response.ok) {
-        setIsAuthenticated(false);
-        window.alert("Logged out!");
-      }
+        if (response.ok) {
+            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
+            setIsAuthenticated(false);
+        } else {
+            console.error('Logout failed:', response.statusText);
+        }
     } catch (error) {
-      console.error("Logout failed", error);
+        console.error('Logout error:', error);
+    } finally {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        setIsAuthenticated(false);
     }
-  };
+};
+
 
   return (
     <Router>
@@ -75,7 +81,6 @@ const Router1 = () => {
 
         {isAuthenticated ? (
           <>
-            <Route path="/form" element={<MyForm />} />
             <Route path="/fp" element={<FunctionPoint />} />
             <Route path="/tp" element={<ThreePoint />} />
             <Route path="/delphi" element={<Delphi />} />
