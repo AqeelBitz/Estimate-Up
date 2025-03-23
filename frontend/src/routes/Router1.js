@@ -24,6 +24,7 @@ import InputRound1 from '../EstimationMethods/delphi/components/InputRound1';
 import InputRound2 from '../EstimationMethods/delphi/components/InputRound2';
 import InputRound3 from '../EstimationMethods/delphi/components/InputRound3';
 import Result from '../EstimationMethods/delphi/components/Result';
+import Analytics from '../Analytics';
 
 const Router1 = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -66,6 +67,7 @@ const Router1 = () => {
 
   return (
     <Router>
+          <Analytics /> {/* Tracks page views automatically */}
       <Navbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
