@@ -19,7 +19,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-bootstrap": "^0.32.1",
     "react-chartjs-2": "^5.2.0",
@@ -36,6 +38,7 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "reselect": "^4.1.7",
+    "sitemap": "^8.0.0",
     "styled-components": "^5.3.6",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
