@@ -76,7 +76,6 @@ const Login = ({ setIsAuthenticated }) => {
           body: JSON.stringify({ email: email, password: password })
         });
         const data = await res.json();
-        console.log(data);
 
         if (res.status === 400 || !data) {
           setShowErrorMessage(true); // Show error message
