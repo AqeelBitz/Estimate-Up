@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const FooterContainer = styled.footer`
-  background-color: #101522;
-  padding: 40px 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 4rem 0 2rem;
+  position: relative;
 `;
 
 export const FooterWrapper = styled.div`
@@ -11,14 +12,18 @@ export const FooterWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 24px;
+`;
+
+export const FooterContent = styled.div`
+  width: 100%;
+  max-width: 1200px;
 `;
 
 export const FooterLinksContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   width: 100%;
 
@@ -28,42 +33,75 @@ export const FooterLinksContainer = styled.div`
 `;
 
 export const FooterLinksWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const FooterLinkItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 16px;
-  width: 160px;
   color: #fff;
-
-  @media screen and (max-width: 480px) {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    margin: 10px 0;
-  }
+  padding: 0 1rem;
 `;
 
-export const FooterLinkTitle = styled.h1`
-  font-size: 14px;
-  margin-bottom: 16px;
+export const FooterLinkTitle = styled.h3`
+  font-size: 18px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: #f8fafc;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #01bf71;
+    border-radius: 3px;
+  }
 `;
 
 export const FooterLink = styled(Link)`
-  color: #fff;
+  color: #cbd5e1;
   text-decoration: none;
-  margin-bottom: 8px;
-  font-size: 14px;
+  margin-bottom: 0.75rem;
+  font-size: 15px;
+  transition: all 0.3s ease;
 
   &:hover {
     color: #01bf71;
-    transition: 0.3s ease-out;
+    padding-left: 5px;
   }
+`;
+
+export const FooterDivider = styled.div`
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 2.5rem 0;
+`;
+
+export const FooterDescription = styled.p`
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 1rem;
 `;
 
 export const SocialMedia = styled.section`
@@ -76,44 +114,65 @@ export const SocialMediaWrapper = styled.div`
   align-items: center;
   flex-wrap: wrap;
   max-width: 1100px;
-  margin: 40px auto 0;
-  padding: 0 20px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    text-align: center;
+    gap: 1.5rem;
   }
 `;
 
-export const SocialLogo = styled(Link)`
-  color: #fff;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  margin-bottom: 16px;
-`;
-
 export const WebsiteRights = styled.small`
-  color: #fff;
-  margin-bottom: 16px;
+  color: #94a3b8;
+  font-size: 14px;
 `;
 
 export const SocialIcons = styled.div`
   display: flex;
   justify-content: center;
-  gap: 15px;
-  width: 100%;
+  gap: 1.5rem;
 `;
 
 export const SocialIconLink = styled.a`
-  color: #fff;
-  font-size: 24px;
-
+  color: #cbd5e1;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  
   &:hover {
     color: #01bf71;
-    transition: 0.3s ease-out;
+    transform: translateY(-3px);
+  }
+`;
+
+export const BackToTop = styled.button`
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #01bf71;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 15px rgba(1, 191, 113, 0.3);
+  transition: all 0.3s ease;
+  z-index: 10;
+
+  &:hover {
+    background: #00a35c;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(1, 191, 113, 0.4);
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 `;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet';
 
 
 const FunctionF = () => {
@@ -89,14 +90,30 @@ const FunctionF = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Function Point Calculator | EstimateUp</title>
+                <meta
+                    name="description"
+                    content="Calculate function points for software projects using the Function Point method. Estimate effort, time, and cost based on complexity."
+                />
+                <meta property="og:title" content="Function Point Calculator | EstimateUp" />
+                <meta
+                    property="og:description"
+                    content="Estimate software project complexity using the Function Point method. Input various function types to get an accurate calculation."
+                />
+                <meta property="og:url" content="https://estimate-up.vercel.app/function" />
+                <meta property="og:type" content="website" />
+                <link rel="canonical" href="https://estimate-up.vercel.app/function" />
+            </Helmet>
+
             <div className="main">
                 <h1 className='t_name'>FUNCTION POINT CALCULATOR</h1>
                 <br />
-                <div class="table-container">
+                <div className="table-container">
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <h3 style={{ fontWeight: 'bold', color: 'aqua', backgroundColor: '#3f4044e8', width: '30%', borderRadius: '20px' }}>Step-01</h3><br /><br />
                     </div>
-                    <table class="data-table">
+                    <table className="data-table">
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -148,10 +165,8 @@ const FunctionF = () => {
                 <br />
                 <br />
                 <div style={{ color: 'green' }}>
-                    --Read the above table.Choose the appropriate weighting factor (i.e.simple,complex or average) and fill its S.no iin the box,and then fill in the function types--
-
+                    --Read the above table. Choose the appropriate weighting factor (i.e. simple, complex, or average) and fill its S.No in the box, and then fill in the function types--
                 </div>
-
 
                 <div className="fact"><strong><h3>
                     <table className="fact">
@@ -197,7 +212,6 @@ const FunctionF = () => {
                     border: "none",
                     height: "2px",
                     backgroundColor: "white",
-                    // marginBottom: "50px",
                     opacity: "100%"
                 }} />
                 <br />
@@ -205,7 +219,7 @@ const FunctionF = () => {
                     <h3 style={{ fontWeight: 'bold', color: 'aqua', backgroundColor: '#3f4044e8', width: '30%', borderRadius: '20px' }}>Step-02</h3><br /><br />
                 </div>
                 <div>
-                    <em><strong style={{ color: 'green' }}>--Assign a value of importance to each question. Questions will be asked in the promppt window. write answers only within 0 to 5 where Zero being of low importance and 5 being of high importance.--</strong></em>
+                    <em><strong style={{ color: 'green' }}>--Assign a value of importance to each question. Questions will be asked in the prompt window. Write answers only within 0 to 5 where Zero being of low importance and 5 being of high importance.--</strong></em>
                     <strong><h3>Click on the below button for adding the complexity factors</h3></strong>
                     <p>
                         <button className="button-43 res" role="button" onClick={func}>CLICK HERE TO OPEN THE PROMPT WINDOW</button>
@@ -215,12 +229,12 @@ const FunctionF = () => {
                     </p>
                 </div>
                 <button className="button-43" role="button" onClick={getffp} >CALCULATE FP</button><br />
-                <br /><input type="text" id="F_P" placeholder="FP is " readOnly/>
+                <br /><input type="text" id="F_P" placeholder="FP is " readOnly />
                 <br /><br />
             </div>
             <div className='btn-box'>
                 <div>
-                    <Link to="/cocomo" className="btn btn-danger" style={{display:'flex'}}>
+                    <Link to="/cocomo" className="btn btn-danger" style={{ display: 'flex' }}>
                         <div>
                             <i className="fas fa-arrow-left"></i>
                         </div>
@@ -230,7 +244,7 @@ const FunctionF = () => {
                     </Link>
                 </div>
                 <div>
-                    <Link to="/sloc" className="btn btn-primary" style={{display:'flex'}}>
+                    <Link to="/sloc" className="btn btn-primary" style={{ display: 'flex' }}>
                         <div>
                             Source Lines of Code
                         </div>
@@ -243,6 +257,7 @@ const FunctionF = () => {
 
         </div>
     )
+
 }
 
 export default FunctionF

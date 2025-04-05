@@ -17,6 +17,7 @@ const Home = () => {
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
+      
       <CoverSection />
       <InfoSection {...aboutObj} />
       <InfoSection {...discoverObj} />

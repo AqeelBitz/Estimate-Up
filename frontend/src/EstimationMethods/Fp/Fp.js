@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom'
 import './fp.css'
 const FunctionF = () => {
@@ -74,13 +74,28 @@ const FunctionF = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>Function Point Calculator | EstimateUp</title>
+                <meta
+                    name="description"
+                    content="Use this free Function Point Estimation tool to calculate Unadjusted Function Points (UFP) and total FP based on software complexity factors. Ideal for project estimation."
+                />
+                <meta property="og:title" content="Function Point Estimator | EstimateUp" />
+                <meta
+                    property="og:description"
+                    content="Calculate software Function Points easily using our interactive online calculator. Perfect for developers, engineers, and project managers."
+                />
+                <meta property="og:url" content="https://estimate-up.vercel.app/fp" />
+                <meta property="og:type" content="website" />
+                <link rel="canonical" href="https://estimate-up.vercel.app/fp" />
+            </Helmet>
             <div className="main">
                 <h1 className='t_name'>
                     FUNCTION POINT CALCULATOR
                 </h1>
                 <br />
                 <div class="table-container">
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <h3 style={{ fontWeight: 'bold', color: 'aqua', backgroundColor: '#3f4044e8', width: '30%', borderRadius: '20px' }}>Step-01</h3><br /><br />
                     </div>
                     <table class="data-table">
@@ -188,7 +203,7 @@ const FunctionF = () => {
                     opacity: "100%"
                 }} />
                 <br />
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems:'center'  }}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <h3 style={{ fontWeight: 'bold', color: 'aqua', backgroundColor: '#3f4044e8', width: '30%', borderRadius: '20px' }}>Step-02</h3><br /><br />
                 </div>
                 <div>

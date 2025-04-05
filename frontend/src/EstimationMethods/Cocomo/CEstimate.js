@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet';
 
 const CEstimate = () => {
 
@@ -104,14 +105,39 @@ const CEstimate = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Software Cost Estimation | EstimateUp</title>
+                <meta name="description" content="Estimate the cost, effort, and time of software development using the COCOMO model." />
+                <meta name="keywords" content="Software cost estimation, COCOMO, Effort estimation, Time estimation, Software development cost, SLOC, KLOC, Labor rate, Software metrics" />
+                <meta property="og:title" content="Software Cost Estimation - EstimateUp" />
+                <meta property="og:description" content="Estimate the cost, effort, and time of software development using the COCOMO model." />
+                <meta property="og:url" content="https://estimate-up.vercel.app" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="https://example.com/path-to-your-image.jpg" /> {/* Replace with actual image URL */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Software Cost Estimation - EstimateUp" />
+                <meta name="twitter:description" content="Estimate the cost, effort, and time of software development using the COCOMO model." />
+                <meta name="twitter:image" content="https://example.com/path-to-your-image.jpg" /> {/* Replace with actual image URL */}
+                <script type="application/ld+json">
+                    {`
+                {
+                    "@context": "https://schema.org",
+                    "@type": "WebPage",
+                    "name": "Software Cost Estimation | EstimateUp",
+                    "description": "Estimate the cost, effort, and time of software development using the COCOMO model.",
+                    "url": "https://estimate-up.vercel.app"
+                }
+            `}
+                </script>
+            </Helmet>
             <div className="main">
                 <h1 className="est t_name ">Estimation of Cost,Effort,Time of development of Software</h1>
 
                 <div className='item_container '>
-                Write SLOC:
-                <input type="text" id="sloc" name="sloc" required />
-                <button className="btn btn-primary" onClick={clicks}>GET KLOC</button>
-                KLOC=<input type="text" id="kloc" />
+                    Write SLOC:
+                    <input type="text" id="sloc" name="sloc" required aria-label="Enter SLOC" />
+                    <button className="btn btn-primary" onClick={clicks} aria-label="Calculate KLOC">GET KLOC</button>
+                    KLOC=<input type="text" id="kloc" aria-label="Enter KLOC" />
                     <h3 style={{ backgroundColor: '#7e74b4', color: 'white', padding: '5px', fontWeight: 'bold', borderRadius: '15px' }}>Software Cost Drivers</h3>
                     <div className='separate_item'>
                         <strong>Product:</strong>
@@ -337,7 +363,7 @@ const CEstimate = () => {
 
                     <div className="form-group row d-flex justify-content-center">
                         <div className="col-sm-5">
-                            <button className="mf_btn" onClick={hey}>calculate mf</button>
+                            <button className="mf_btn" onClick={hey} aria-label="Calculate MF">calculate mf</button>
                         </div>
                         <div className="col-sm-5">
                             <input className="form-control" type="text" id="haha" readOnly />
@@ -361,7 +387,7 @@ const CEstimate = () => {
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">LABOR RATE:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="labour rate" id="LR" required />
+                            <input type="text" class="form-control" placeholder="labour rate" id="LR" aria-label="Enter LABOR RATE" required />
                         </div>
                         <div class="col-sm-2">
                             $
@@ -369,15 +395,15 @@ const CEstimate = () => {
                     </div>
 
                     <div class="separate_item">
-                    <div class="form-group row">
-                        <div class="col-sm-12 offset-sm-2">
-                            <button class="mf_btn " onClick={effort}>Calculate Effort, Time, and Cost</button>
+                        <div class="form-group row">
+                            <div class="col-sm-12 offset-sm-2">
+                                <button class="mf_btn " onClick={effort} aria-label="Calculate Effort, Time, and Cost">Calculate Effort, Time, and Cost</button>
+                            </div>
                         </div>
-                    </div>
                         <div class="form-group row pl-5">
                             <label class="col-sm-2 col-form-label">Effort:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="effort" readonly />
+                                <input type="text" class="form-control" id="effort" aria-label="Enter Effort" readonly />
                             </div>
                             <div class="col-sm-2">
                                 P-M
@@ -387,7 +413,7 @@ const CEstimate = () => {
                         <div class="form-group row pl-5">
                             <label class="col-sm-2 col-form-label">Time of Dev.:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="time" readonly />
+                                <input type="text" class="form-control" id="time" aria-label="Enter Time of Dev" readonly />
                             </div>
                             <div class="col-sm-2">
                                 Months
@@ -397,10 +423,10 @@ const CEstimate = () => {
                         <div class="form-group row pl-5">
                             <label class="col-sm-2 col-form-label">Cost:</label>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" id="cost" readonly />
+                                <input type="text" class="form-control" id="cost" aria-label="Enter Cost" readonly />
                             </div>
                             <div class="col-sm-2">
-                                $  
+                                $
                             </div>
                         </div>
                     </div>

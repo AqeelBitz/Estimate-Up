@@ -4,9 +4,6 @@ import Icon2 from '../../images/functionpoint.png';
 import Icon3 from '../../images/cocomo.png';
 import Icon4 from '../../images/cocomo2.png';
 import Icon5 from '../../images/delphi.png';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import {
   ServicesContainer,
   ServicesH1,
@@ -22,15 +19,15 @@ import {
 const Services = () => {
   return (
     <ServicesContainer id='services'>
-      <ServicesH1>Our Services</ServicesH1>
+      <ServicesH1>Software Cost Estimation Techniques</ServicesH1>
       <ServicesWrapper>
         <ServiceLink to="/tp">
           <ServicesCard>
             <ServicesCardInner>
-              <ServicesIcon src={Icon1} />
-              <ServicesH2>Three Point</ServicesH2>
+              <ServicesIcon src={Icon1} alt="Three-Point Estimation icon" />
+              <ServicesH2>Three-Point Estimation</ServicesH2>
               <ServicesP>
-                Ensures that managers minimize exposure to loss, and it lessens the risk of wasted resources.
+                Improve accuracy by using optimistic, pessimistic, and most likely estimates to minimize risk and resource waste.
               </ServicesP>
             </ServicesCardInner>
           </ServicesCard>
@@ -39,9 +36,11 @@ const Services = () => {
         <ServiceLink to='/fp'>
           <ServicesCard>
             <ServicesCardInner>
-              <ServicesIcon src={Icon2} />
-              <ServicesH2>Functional Point</ServicesH2>
-              <ServicesP>The process of sizing software based on the number of business functions.</ServicesP>
+              <ServicesIcon src={Icon2} alt="Function Point Analysis icon" />
+              <ServicesH2>Function Point Analysis</ServicesH2>
+              <ServicesP>
+                Estimate software size by analyzing business functionalities and user interactions to improve planning and budgeting.
+              </ServicesP>
             </ServicesCardInner>
           </ServicesCard>
         </ServiceLink>
@@ -49,9 +48,11 @@ const Services = () => {
         <ServiceLink to='/cocomo'>
           <ServicesCard>
             <ServicesCardInner>
-              <ServicesIcon src={Icon3} />
-              <ServicesH2>Cocomo 1</ServicesH2>
-              <ServicesP>Predicts the efforts and schedule of a software product based on the size of the software.</ServicesP>
+              <ServicesIcon src={Icon3} alt="COCOMO Model icon" />
+              <ServicesH2>COCOMO Model (Basic)</ServicesH2>
+              <ServicesP>
+                Calculate effort, cost, and project duration based on software size using the original COCOMO algorithm.
+              </ServicesP>
             </ServicesCardInner>
           </ServicesCard>
         </ServiceLink>
@@ -59,9 +60,11 @@ const Services = () => {
         <ServiceLink to='/cocomo2'>
           <ServicesCard>
             <ServicesCardInner>
-              <ServicesIcon src={Icon4} />
-              <ServicesH2>Cocomo 2</ServicesH2>
-              <ServicesP>Estimate the cost, effort and schedule.</ServicesP>
+              <ServicesIcon src={Icon4} alt="COCOMO II Model icon" />
+              <ServicesH2>COCOMO II Model</ServicesH2>
+              <ServicesP>
+                Advanced model for estimating modern software projects with greater flexibility, accuracy, and scalability.
+              </ServicesP>
             </ServicesCardInner>
           </ServicesCard>
         </ServiceLink>
@@ -69,9 +72,11 @@ const Services = () => {
         <ServiceLink to='/delphi'>
           <ServicesCard>
             <ServicesCardInner>
-              <ServicesIcon src={Icon5} />
-              <ServicesH2>Delphi</ServicesH2>
-              <ServicesP>Estimate the likelihood and outcome of future events.</ServicesP>
+              <ServicesIcon src={Icon5} alt="Delphi Estimation icon" />
+              <ServicesH2>Delphi Estimation</ServicesH2>
+              <ServicesP>
+                Gather expert consensus to estimate software cost and effort through multiple anonymous feedback rounds.
+              </ServicesP>
             </ServicesCardInner>
           </ServicesCard>
         </ServiceLink>

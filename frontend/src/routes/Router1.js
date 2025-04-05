@@ -25,6 +25,10 @@ import InputRound2 from '../EstimationMethods/delphi/components/InputRound2';
 import InputRound3 from '../EstimationMethods/delphi/components/InputRound3';
 import Result from '../EstimationMethods/delphi/components/Result';
 import Analytics from '../Analytics';
+import Blog from '../pages/Blog';
+import Tutorials from '../pages/Tutorials';
+import Documentation from '../pages/Documentation';
+import FAQ from '../pages/FAQ';
 
 const Router1 = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -62,12 +66,11 @@ const Router1 = () => {
         sessionStorage.removeItem('token');
         setIsAuthenticated(false);
     }
-};
-
+  };
 
   return (
     <Router>
-          <Analytics /> {/* Tracks page views automatically */}
+      <Analytics /> {/* Tracks page views automatically */}
       <Navbar isAuthenticated={isAuthenticated} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -80,6 +83,12 @@ const Router1 = () => {
         <Route path="/input_r1" element={<InputRound1 />} />
         <Route path="/input_r2" element={<InputRound2 />} />
         <Route path="/input_r3" element={<InputRound3 />} />
+        
+        {/* Public resource pages (available without authentication) */}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/tutorials" element={<Tutorials />} />
+        <Route path="/documentation" element={<Documentation />} />
+        <Route path="/faq" element={<FAQ />} />
 
         {isAuthenticated ? (
           <>

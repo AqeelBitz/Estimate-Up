@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Sloc = () => {
   function calc(e) {
@@ -15,6 +16,12 @@ const Sloc = () => {
 
   return (
     <div className="container py-5">
+      <Helmet>
+        <meta name="description" content="Calculate Source Lines of Code (SLOC) based on Function Points and Programming Language." />
+        <meta name="keywords" content="SLOC, source lines of code, function point, software estimation, software cost estimation, programming languages" />
+        <meta name="author" content="EstimateUp" />
+        <title>Source Lines of Code (SLOC) Calculator</title>
+      </Helmet>
       <h1 className="mb-4 t_name">Source Lines of Code (SLOC) Calculator</h1>
       <form>
         <div className='sloc_separate_item'>
@@ -45,14 +52,14 @@ const Sloc = () => {
           <small className="form-text text-muted">
             **The language factors used for the calculation are taken on the basis of average value.
           </small>
-          <div className="sloc-buttons" style={{display:'flex', justifyContent: 'space-evenly',alignItems: 'baseline'}}>
+          <div className="sloc-buttons" style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'baseline' }}>
             <div className="col-sm-5">
-              <button className=" mr-3 align-self-center sloc_btn" type="button" onClick={calc}>
+              <button className="mr-3 align-self-center sloc_btn" type="button" onClick={calc}>
                 Calculate SLOC
               </button>
             </div>
             <div className="col-sm-5">
-              <input type="text" id="result_sloc" className="form-control " readOnly />
+              <input type="text" id="result_sloc" className="form-control" readOnly />
             </div>
           </div>
 

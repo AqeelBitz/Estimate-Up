@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import Video from '../../videos/video.mp4';
-import { CoverContainer, CoverBg, VideoBg, CoverContent, CoverH1, CoverP, CoverBtnWrapper, Button, ArrowForward, ArrowRight } from './CoverElements';
+import {
+  CoverContainer,
+  CoverBg,
+  VideoBg,
+  CoverContent,
+  CoverH1,
+  CoverP,
+  CoverBtnWrapper,
+  Button,
+  ArrowForward,
+  ArrowRight
+} from './CoverElements';
 
 const CoverSection = () => {
   const [hover, setHover] = useState(false);
@@ -15,9 +26,11 @@ const CoverSection = () => {
         <VideoBg autoPlay loop muted src={Video} type='video/mp4' />
       </CoverBg>
       <CoverContent>
-        <CoverH1>Easier Estimation, More Savings</CoverH1>
-        <CoverP>Sign up for a new account today and enjoy our awesome features.</CoverP>
-
+        <CoverH1>EstimateUp - Smart Software Cost Estimation</CoverH1>
+        <CoverP>
+          Easily estimate software development costs using trusted techniques like Function Point Analysis, COCOMO, Delphi, and Three-Point Estimation. 
+          Save time, reduce project risk, and plan with confidence using EstimateUp.
+        </CoverP>
       </CoverContent>
     </CoverContainer>
   );
