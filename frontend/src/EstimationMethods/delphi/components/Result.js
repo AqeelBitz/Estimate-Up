@@ -56,7 +56,9 @@ const Result = () => {
               <div className="row">
                 <div className="col">
                   <div className="bg1 p-4 my-3 shadow">
-                    <h3 className="dh3" id="round_heading" ref={headingRef}></h3>
+                  <h3 className="dh3" id="round_heading" ref={headingRef} aria-live="polite">
+                  {headingRef.current ? headingRef.current.innerHTML : 'Final Estimated Cost of the Project is'}
+                </h3>                
                     <h1 className="text-center display-4 text-primary mb-5 dh1">
                       {effort} days
                     </h1>

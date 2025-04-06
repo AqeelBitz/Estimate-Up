@@ -125,7 +125,7 @@ const Round3 = () => {
         return () => {
           clearInterval(typingInterval);
         };
-    }, [])
+    }, [total_avg1, total_avg2, total_avg3, total_effort, total_effort2, total_effort3])
 
     function calculateConfidenceInterval(data, confidenceLevel) {
         const mean = data.reduce((sum, value) => sum + value, 0) / data.length;
@@ -221,17 +221,21 @@ const Round3 = () => {
                     <th style={{ padding: '0.25rem' }}>lowest Effort</th>
                 </thead>
                 <tbody>
-                    {e_name.map((expertName, index) => (
-                        <tr className="table-row" key={index}>
-                            <th style={{ padding: '0.25rem' }} scope="row">
-                                {expertName}
-                            </th>
-                            <td scope="col" style={{ padding: '0.25rem' }} key={index}>{total_effort[index] + total_effort2[index] + total_effort3[index]}</td>
-                            <td scope="col" style={{ padding: '0.25rem' }} key={index}>{Math.max(...round1[index], ...round2[index], ...round3[index])}</td>
-                            <td scope="col" style={{ padding: '0.25rem' }} key={index}>{Math.min(...round1[index], ...round2[index], ...round3[index])}</td>
-                        </tr>
-                    ))}
-                </tbody>
+                {e_name.map((expertName, index) => (
+                  <tr className="table-row" key={index}>
+                    <th style={{ padding: '0.25rem' }} scope="row">
+                      {expertName}
+                    </th>
+                    <td style={{ padding: '0.25rem' }}>{total_effort[index] + total_effort2[index] + total_effort3[index]}</td>
+                    <td style={{ padding: '0.25rem' }}>
+                      {Math.max(...round1[index], ...round2[index], ...round3[index])}
+                    </td>
+                    <td style={{ padding: '0.25rem' }}>
+                      {Math.min(...round1[index], ...round2[index], ...round3[index])}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
             <table class="table table-bordered">
                 <thead  style={{backgroundColor:'rgb(67 185 143 / 93%)', color:'#fff', fontSize:'1.1rem'}}>
