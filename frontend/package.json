@@ -34,7 +34,6 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
-    "react-snap": "^1.23.0",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.9",
     "redux": "^4.2.0",
@@ -45,15 +44,12 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-  "puppeteer": "^19.7.1"
-},
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build && npm run postbuild",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -71,15 +67,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-"reactSnap": {
-  "inlineCss": true,
-  "puppeteerExecutablePath": "/usr/bin/chromium",
-  "puppeteerArgs": [
-    "--no-sandbox",
-    "--disable-setuid-sandbox",
-    "--disable-dev-shm-usage"
-  ],
-  "source": "build"
-}
+  }
 }
