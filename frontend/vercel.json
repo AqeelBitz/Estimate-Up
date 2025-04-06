@@ -19,16 +19,15 @@
       "continue": true
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html",
+      "src": "/manifest.json",
+      "dest": "/manifest.json",
       "headers": {
-        "Cache-Control": "no-cache"
+        "Cache-Control": "public, max-age=86400"
       }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
-  ],
-  "build": {
-    "env": {
-      "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true"
-    }
-  }
+  ]
 }

@@ -44,7 +44,10 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "/",
+  "homepage": ".",
+  "build": {
+    "baseUrl": "./"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "cross-env CI=false react-scripts build",
