@@ -192,7 +192,8 @@ const Signup = () => {
 
           {/* Image Container */}
           <div className="col-md-6 col-lg-7 col-xl-8 order-md-first img_container" id="img_container">
-            <img src={signup_img} className="img-fluid" alt="Sample image" style={{ height: '80vh', objectFit: 'contain' }} />
+          <img src={signup_img} className="img-fluid" alt="Signup form illustration" style={{ height: '80vh', objectFit: 'contain' }} />
+
           </div>
         </div>
       </div>

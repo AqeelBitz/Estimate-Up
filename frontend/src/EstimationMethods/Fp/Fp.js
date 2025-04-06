@@ -1,44 +1,42 @@
 import React from 'react'
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom'
 import './fp.css'
 const FunctionF = () => {
 
     function UFP() {
-        var x = Number(document.getElementById("wf").value)
+        var x = Number(document.getElementById("wf").value);
+        var temp1, temp2, temp3, temp4, temp5;
+    
         if (x === 1) {
-            var temp1 = 3
-            var temp2 = 4
-            var temp3 = 3
-            var temp4 = 7
-            var temp5 = 5
+            temp1 = 3;
+            temp2 = 4;
+            temp3 = 3;
+            temp4 = 7;
+            temp5 = 5;
+        } else if (x === 2) {
+            temp1 = 4;
+            temp2 = 5;
+            temp3 = 4;
+            temp4 = 10;
+            temp5 = 7;
+        } else if (x === 3) {
+            temp1 = 6;
+            temp2 = 7;
+            temp3 = 6;
+            temp4 = 15;
+            temp5 = 10;
         }
-        else if (x === 2) {
-            var temp1 = 4
-            var temp2 = 5
-            var temp3 = 4
-            var temp4 = 10
-            var temp5 = 7
-        }
-        else {
-            if (x === 3) {
-                var temp1 = 6
-                var temp2 = 7
-                var temp3 = 6
-                var temp4 = 15
-                var temp5 = 10
-            }
-        }
-        var p = Number(document.getElementById("in").value)
-        var q = Number(document.getElementById("out").value)
-        var r = Number(document.getElementById("inq").value)
-        var s = Number(document.getElementById("files").value)
-        var t = Number(document.getElementById("ext_int").value)
-
-        var UFP = ((temp1 * p) + (temp2 * q) + (temp3 * r) + (temp4 * s) + (temp5 * t))
-        document.getElementById("UFP").value = UFP
-
+    
+        var p = Number(document.getElementById("in").value);
+        var q = Number(document.getElementById("out").value);
+        var r = Number(document.getElementById("inq").value);
+        var s = Number(document.getElementById("files").value);
+        var t = Number(document.getElementById("ext_int").value);
+    
+        var UFP = ((temp1 * p) + (temp2 * q) + (temp3 * r) + (temp4 * s) + (temp5 * t));
+        document.getElementById("UFP").value = UFP;
     }
+    
 
     function func() {
         var count = 1;

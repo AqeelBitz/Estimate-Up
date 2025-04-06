@@ -144,7 +144,7 @@ const Login = ({ setIsAuthenticated }) => {
           </div>
 
           <div className="col-md-6 col-lg-7 col-xl-8 order-md-first img_container" id='img_container'>
-            <img src={signin_img} className="img-fluid" alt="Sample image" style={{ height: '80vh', objectFit: 'contain' }} />
+            <img src={signin_img} className="img-fluid" alt="login form illustration" style={{ height: '80vh', objectFit: 'contain' }} />
           </div>
         </div>
       </div>

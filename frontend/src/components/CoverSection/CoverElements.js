@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { MdArrowForward, MdKeyboardArrowRight } from 'react-icons/md';
-
 export const CoverContainer = styled.div`
   background: #0c0c0c;
   display: flex;
@@ -80,38 +78,5 @@ export const CoverP = styled.p`
   }
 `;
 
-export const CoverBtnWrapper = styled.div`
-  margin-top: 32px;
-  display: flex;
-  justify-content: center;
-`;
 
-export const Button = styled.a`
-  border-radius: 50px;
-  background: #01bf71;
-  white-space: nowrap;
-  padding: 14px 48px;
-  color: #fff;
-  font-size: 20px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-decoration: none;
 
-  &:hover {
-    background: #fff;
-    color: #010606;
-    transition: all 0.3s ease-in-out;
-  }
-`;
-
-export const ArrowForward = styled(MdArrowForward)`
-  margin-left: 8px;
-  font-size: 20px;
-`;
-
-export const ArrowRight = styled(MdKeyboardArrowRight)`
-  margin-left: 8px;
-  font-size: 20px;
-`;

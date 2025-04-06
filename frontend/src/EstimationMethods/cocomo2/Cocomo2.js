@@ -1,19 +1,28 @@
-import React, { useEffect, useRef } from 'react'
-import "./cocomo2.css"
+import React, { useEffect, useState, useRef } from 'react';
+import './cocomo2.css';
 import { Helmet } from 'react-helmet';
 
 const Cocomo2 = () => {
     const medaBtnRef = useRef(null);
     const fpBtnRef = useRef(null);
-  
-    let FP = 0;
-    let correctFP = 0;
+
+    const [fiValue, setFiValue] = useState(0);
+    const [ufpValue, setUfpValue] = useState(0);
+    const [fpValue, setFpValue] = useState(0);
+    const [pValue, setPValue] = useState(0); // New state for P
+    const [jobResultMeda, setJobResultMeda] = useState('');
+    const [timeResultMeda, setTimeResultMeda] = useState('');
+    const [jobResultMdp, setJobResultMdp] = useState('');
+    const [timeResultMdp, setTimeResultMdp] = useState('');
+
+    const FP = useRef(0); // Using useRef for FP
+    const correctFP = useRef(0); // Using useRef for correctFP
 
     useEffect(() => {
         if (fpBtnRef.current) {
             fpBtnRef.current.addEventListener('click', () => {
-                FP = 0;
-                correctFP = 0;
+                FP.current = 0;
+                correctFP.current = 0;
                 let sumCoeffCorrComplexity = 0;
                 for (let i = 1; i < 15; i++) {
                     let curr = +document.getElementById('fp' + i).value;
@@ -28,7 +37,7 @@ const Cocomo2 = () => {
 
                 for (let i = 0; i < 3; i++) {
                     for (let j = 0; j < 3; j++) {
-                        FP += +document.getElementById('EI' + i + j).value * EI[i][j] +
+                        FP.current += +document.getElementById('EI' + i + j).value * EI[i][j] +
                             +document.getElementById('EO' + i + j).value * EO[i][j] +
                             +document.getElementById('ILF' + i + j).value * ILF[i][j] +
                             +document.getElementById('EIF' + i + j).value * EIF[i][j] +
@@ -36,25 +45,30 @@ const Cocomo2 = () => {
                     }
                 }
 
-                correctFP = FP * (0.65 + 0.01 * sumCoeffCorrComplexity);
-                 let x1 = document.getElementById('fp')
-                 let x2 = document.getElementById('ufp')
-                 let x3 = document.getElementById('fi')
-                 x1.style.backgroundColor = 'greeen'
-                 x2.style.backgroundColor = 'greeen'
-                 x3.style.backgroundColor = 'greeen'
-                 
+                correctFP.current = FP.current * (0.65 + 0.01 * sumCoeffCorrComplexity);
 
-                document.getElementById('fp').innerHTML = 'Function points without compensation: ' + FP.toFixed(2);
-                document.getElementById('ufp').innerHTML = 'Function points with correction: ' + correctFP.toFixed(2);
-                document.getElementById('fi').innerHTML = 'Correction factor:' + sumCoeffCorrComplexity.toFixed(2);
+                setFiValue(sumCoeffCorrComplexity.toFixed(2));
+                setUfpValue(correctFP.current.toFixed(2));
+                setFpValue(FP.current.toFixed(2));
+
+                let x1 = document.getElementById('fp');
+                let x2 = document.getElementById('ufp');
+                let x3 = document.getElementById('fi');
+                x1.style.backgroundColor = 'green';
+                x2.style.backgroundColor = 'green';
+                x3.style.backgroundColor = 'green';
+
+                // Update the state for job results here
+                setJobResultMeda('Function points without compensation: ' + FP.current.toFixed(2));
+                setTimeResultMeda('Function points with correction: ' + correctFP.current.toFixed(2));
+                setFiValue('Correction factor: ' + sumCoeffCorrComplexity.toFixed(2));
             });
-
         }
+
         if (medaBtnRef.current) {
             medaBtnRef.current.addEventListener('click', () => {
                 const p = countP();
-                document.getElementById('p').innerHTML = 'P = ' + p;
+                setPValue(p); // Set P value here
 
                 const eArch = counteArch(p);
                 let procRUSE = +document.getElementById('rusePr').value;
@@ -68,19 +82,20 @@ const Cocomo2 = () => {
                     +document.getElementById('hD').value * 8;
                 let modules = +document.getElementById('mod').value * 10;
 
-                const FPper = FP / 100;
+                const FPper = FP.current / 100;
                 const kLOC = FPper * 30 * 64 + FPper * 10 * 21 + FPper * 60 * 53;
                 const size = screenForms + docs + modules;
                 const MdpJob = (size * ((100 - procRUSE) / 100)) / PROD;
                 const medaJob = 2.45 * eArch * Math.pow(kLOC / 1000, p);
 
-                document.getElementById('jobResultMeda').innerHTML = 'Labor costs (person/month): ' + medaJob.toFixed(2);
-                document.getElementById('timeResultMeda').innerHTML = 'Time(month):' + (3.0 * Math.pow(medaJob, 0.33 + 0.2 * (p - 1.01))).toFixed(2);
-                document.getElementById('jobResultMdp').innerHTML = 'Labor costs (person/month):' + MdpJob;
-                document.getElementById('timeResultMdp').innerHTML = 'Time(month):' + (3 * Math.pow(MdpJob, 0.33 + 0.2 * (p - 1.01))).toFixed(2);
+                // Update the state for job and time results here
+                setJobResultMeda('Labor costs (person/month): ' + medaJob.toFixed(2));
+                setTimeResultMeda('Time (month): ' + (3.0 * Math.pow(medaJob, 0.33 + 0.2 * (p - 1.01))).toFixed(2));
+                setJobResultMdp('Labor costs (person/month): ' + MdpJob);
+                setTimeResultMdp('Time (month): ' + (3 * Math.pow(MdpJob, 0.33 + 0.2 * (p - 1.01))).toFixed(2));
             });
         }
-    })
+    }, []);
 
     function countP() {
         let prec = document.getElementById('prec');
@@ -115,279 +130,291 @@ const Cocomo2 = () => {
 
         return (PERS * RCPX * RUSE * PDIF * FCIL * SCED * PREX).toFixed(2);
     }
-    
     return (
         <div className="cocomo2-calculator">
-            
-        <Helmet>
-        <title>COCOMO II Calculator | Software Cost Estimation Tool</title>
-        <meta name="description" content="Advanced COCOMO II calculator for software project estimation. Calculate function points, labor costs, and project timelines using the proven COCOMO II model." />
-        <meta name="keywords" content="COCOMO II, software estimation, project planning, function points, cost estimation, software metrics" />
-        <meta property="og:title" content="COCOMO II Calculator | Software Cost Estimation Tool" />
-        <meta property="og:description" content="Calculate software project costs and timelines using the COCOMO II estimation model" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="COCOMO II Calculator" />
-        <meta name="twitter:description" content="Advanced software project estimation tool using COCOMO II model" />
-        <link rel="canonical" href="https://yourwebsite.com/cocomo2-calculator" />
-    </Helmet>
-        
-        <header>
+
+            <Helmet>
+                <title>COCOMO II Calculator | Software Cost Estimation Tool</title>
+                <meta name="description" content="Advanced COCOMO II calculator for software project estimation. Calculate function points, labor costs, and project timelines using the proven COCOMO II model." />
+                <meta name="keywords" content="COCOMO II, software estimation, project planning, function points, cost estimation, software metrics" />
+                <meta property="og:title" content="COCOMO II Calculator | Software Cost Estimation Tool" />
+                <meta property="og:description" content="Calculate software project costs and timelines using the COCOMO II estimation model" />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="COCOMO II Calculator" />
+                <meta name="twitter:description" content="Advanced software project estimation tool using COCOMO II model" />
+                <link rel="canonical" href="https://yourwebsite.com/cocomo2-calculator" />
+            </Helmet>
+
+            <header>
                 <h1 className='t_name'>COCOMO II Software Cost Estimation Calculator</h1>
             </header>
-            
+
             <main className="container cocomo_container">
-                <section className="row">
+                <section className="row" aria-labelledby="function-point-calculator">
                     <article className="col functionalPoint cocomo2_col">
-                        <h2 className='cocomo2_heading' style={{backgroundColor:'green',borderRadius:'7px', color:'white'}}>Function Point Method</h2>
-                        <p className="calculator-description">Calculate software size using function point analysis to estimate project complexity.</p>
-                        
-                        <div className='flex-item' >
-                            <label htmlFor="fp1">Data transmission</label>
-                            <input className='cocomo2_input' id="fp1" type="number" min="0" max="5" aria-label="Data transmission complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp2">Distributed data processing</label>
-                            <input className='cocomo2_input' id="fp2" type="number" min="0" max="5" aria-label="Distributed data processing complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp3">Performance</label>
-                            <input className='cocomo2_input' id="fp3" type="number" min="0" max="5" aria-label="Performance requirements complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp4">Operating restrictions</label>
-                            <input className='cocomo2_input' id="fp4" type="number" min="0" max="5" aria-label="Operating restrictions complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp5">Transaction frequency</label>
-                            <input className='cocomo2_input' id="fp5" type="number" min="0" max="5" aria-label="Transaction frequency complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp6">Online data entry</label>
-                            <input className='cocomo2_input' id="fp6" type="number" min="0" max="5" aria-label="Online data entry complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp7">End User Efficiency</label>
-                            <input className='cocomo2_input' id="fp7" type="number" min="0" max="5" aria-label="End user efficiency complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp8">Live update</label>
-                            <input className='cocomo2_input' id="fp8" type="number" min="0" max="5" aria-label="Live update complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp9">Complexity of processing</label>
-                            <input className='cocomo2_input' id="fp9" type="number" min="0" max="5" aria-label="Processing complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp10">Reusability</label>
-                            <input className='cocomo2_input' id="fp10" type="number" min="0" max="5" aria-label="Reusability complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp11">Ease of installation</label>
-                            <input className='cocomo2_input' id="fp11" type="number" min="0" max="5" aria-label="Installation ease complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp12">Ease of operation</label>
-                            <input className='cocomo2_input' id="fp12" type="number" min="0" max="5" aria-label="Operation ease complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp13">No. of possible installations on various platforms</label>
-                            <input className='cocomo2_input' id="fp13" type="number" min="0" max="5" aria-label="Multi-platform installation complexity rating" /><br />
-                        </div>
-                        <div className='flex-item'>
-                            <label htmlFor="fp14">Ease of change</label>
-                            <input className='cocomo2_input' id="fp14" type="number" min="0" max="5" aria-label="Change ease complexity rating" /><br />
-                        </div>
-                        
-                        <button type="submit"   className="fpBtn" ref={fpBtnRef} aria-label="Calculate function points">Calculate</button>
-                        <div className="results-section" style={{ padding:'5px', marginTop:'5px'}}>
-                            <h3 id="fi" aria-live="polite"></h3>
-                            <h3 id="ufp" aria-live="polite"></h3>
-                            <h3 id="fp" aria-live="polite"></h3>
-                        </div>
+                        <h2 id="function-point-calculator" className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white' }}>Function Point Method Calculator</h2>
+                        <p className="calculator-description">Calculate software size using function point analysis to estimate project complexity. Our tool helps measure software development effort based on user-visible functionality.</p>
+
+                        <form aria-label="Function point calculation form">
+                            <fieldset>
+                                <legend className="visually-hidden">General System Characteristics</legend>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp1">Data transmission complexity</label>
+                                    <input className='cocomo2_input' id="fp1" type="number" min="0" max="5" aria-label="Data transmission complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp2">Distributed data processing complexity</label>
+                                    <input className='cocomo2_input' id="fp2" type="number" min="0" max="5" aria-label="Distributed data processing complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp3">Performance requirements</label>
+                                    <input className='cocomo2_input' id="fp3" type="number" min="0" max="5" aria-label="Performance requirements complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp4">Operating restrictions</label>
+                                    <input className='cocomo2_input' id="fp4" type="number" min="0" max="5" aria-label="Operating restrictions complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp5">Transaction frequency</label>
+                                    <input className='cocomo2_input' id="fp5" type="number" min="0" max="5" aria-label="Transaction frequency complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp6">Online data entry complexity</label>
+                                    <input className='cocomo2_input' id="fp6" type="number" min="0" max="5" aria-label="Online data entry complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp7">End User Efficiency</label>
+                                    <input className='cocomo2_input' id="fp7" type="number" min="0" max="5" aria-label="End user efficiency complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp8">Live update complexity</label>
+                                    <input className='cocomo2_input' id="fp8" type="number" min="0" max="5" aria-label="Live update complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp9">Complexity of processing</label>
+                                    <input className='cocomo2_input' id="fp9" type="number" min="0" max="5" aria-label="Processing complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp10">Reusability requirements</label>
+                                    <input className='cocomo2_input' id="fp10" type="number" min="0" max="5" aria-label="Reusability complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp11">Ease of installation</label>
+                                    <input className='cocomo2_input' id="fp11" type="number" min="0" max="5" aria-label="Installation ease complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp12">Ease of operation</label>
+                                    <input className='cocomo2_input' id="fp12" type="number" min="0" max="5" aria-label="Operation ease complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp13">Multi-platform installation complexity</label>
+                                    <input className='cocomo2_input' id="fp13" type="number" min="0" max="5" aria-label="Multi-platform installation complexity rating (0-5)" />
+                                </div>
+                                <div className='flex-item'>
+                                    <label htmlFor="fp14">Ease of change</label>
+                                    <input className='cocomo2_input' id="fp14" type="number" min="0" max="5" aria-label="Change ease complexity rating (0-5)" />
+                                </div>
+                            </fieldset>
+
+                            <button type="submit" className="fpBtn" ref={fpBtnRef} aria-label="Calculate function points">Calculate Function Points</button>
+
+                            <div className="results-section" style={{ padding: '5px', marginTop: '5px' }} aria-live="polite">
+                                <h3 id="fi">Function Index: <span>{fiValue}</span></h3>
+                                <h3 id="ufp">Unadjusted Function Points: <span>{ufpValue}</span></h3>
+                                <h3 id="fp">Adjusted Function Points: <span>{fpValue}</span></h3>
+                            </div>
+                        </form>
                     </article>
-                    
-                    <article className="col leftColoumn cocomo2_col">
+
+                    <article className="col leftColoumn cocomo2_col" aria-labelledby="complexity-matrices">
+                        <h2 id="complexity-matrices" className="visually-hidden">Complexity Matrices</h2>
+
                         <section className='leftColumnTable'>
-                            <h3 className='cocomo2_heading' style={{backgroundColor:'green',borderRadius:'7px', color:'white'}}>External Inputs (EI)</h3>
+                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white' }}>External Inputs (EI) Complexity Matrix</h3>
                             <table style={{ width: '100%', margin: "10px 0", borderCollapse: 'collapse' }} aria-label="External inputs complexity matrix">
+                                <caption className="visually-hidden">External Inputs complexity rating based on data elements and file types referenced</caption>
                                 <thead>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">Data Elements</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">1-4</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">5-15</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">&gt;15</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">Data Elements</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">1-4 (Simple)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">5-15 (Medium)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">&gt;15 (Complex)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="row">0-1</th>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI00" type="text" style={{width: '100%'}} aria-label="EI simple complexity input"/></td>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI01" type="text" style={{width: '100%'}} aria-label="EI medium complexity input"/></td>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI02" type="text" style={{width: '100%'}} aria-label="EI high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">0-1 File Types</th>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI00" type="text" style={{ width: '100%' }} aria-label="EI simple complexity input" /></td>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI01" type="text" style={{ width: '100%' }} aria-label="EI medium complexity input" /></td>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI02" type="text" style={{ width: '100%' }} aria-label="EI high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="row">2</th>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI10" type="text" style={{width: '100%'}} aria-label="EI simple complexity input"/></td>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI11" type="text" style={{width: '100%'}} aria-label="EI medium complexity input"/></td>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI12" type="text" style={{width: '100%'}} aria-label="EI high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">2 File Types</th>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI10" type="text" style={{ width: '100%' }} aria-label="EI simple complexity input" /></td>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI11" type="text" style={{ width: '100%' }} aria-label="EI medium complexity input" /></td>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI12" type="text" style={{ width: '100%' }} aria-label="EI high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="row">&gt;2</th>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI20" type="text" style={{width: '100%'}} aria-label="EI simple complexity input"/></td>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI21" type="text" style={{width: '100%'}} aria-label="EI medium complexity input"/></td>
-                                        <td style={{padding:'5px'}}><input className='cocomo2_input' id="EI22" type="text" style={{width: '100%'}} aria-label="EI high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">&gt;2 File Types</th>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI20" type="text" style={{ width: '100%' }} aria-label="EI simple complexity input" /></td>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI21" type="text" style={{ width: '100%' }} aria-label="EI medium complexity input" /></td>
+                                        <td style={{ padding: '5px' }}><input className='cocomo2_input' id="EI22" type="text" style={{ width: '100%' }} aria-label="EI high complexity input" /></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </section>
-                    
+
                         <section className='leftColumnTable'>
-                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px' }}>External Outputs (EO)</h3>
+                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px' }}>External Outputs (EO) Complexity Matrix</h3>
                             <table style={{ borderCollapse: 'collapse', width: '100%', margin: '10px 0px' }} aria-label="External outputs complexity matrix">
-                              <thead>
-                                <tr>
-                                  <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">Data Elements</th>
-                                  <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">1-4</th>
-                                  <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="col">5-19</th>
-                                  <th style={{ padding:'5px', backgroundColor:'#ccc'}} scope="col">&gt;19</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th style={{ padding:'5px', backgroundColor:'#ccc' }} scope="row">0-1</th>
-                                  <td><input className='cocomo2_input' id="EO00" type="text" style={{ width: '100%' }} aria-label="EO simple complexity input"/></td>
-                                  <td><input className='cocomo2_input' id="EO01" type="text" style={{ width: '100%' }} aria-label="EO medium complexity input"/></td>
-                                  <td><input className='cocomo2_input' id="EO02" type="text" style={{ width: '100%' }} aria-label="EO high complexity input"/></td>
-                                </tr>
-                                <tr>
-                                  <th style={{padding:'5px', backgroundColor:'#ccc'}} scope="row">2-3</th>
-                                  <td><input className='cocomo2_input' id="EO10" type="text" style={{ width: '100%' }} aria-label="EO simple complexity input"/></td>
-                                  <td><input className='cocomo2_input' id="EO11" type="text" style={{ width: '100%' }} aria-label="EO medium complexity input"/></td>
-                                  <td><input className='cocomo2_input' id="EO12" type="text" style={{ width: '100%' }} aria-label="EO high complexity input"/></td>
-                                </tr>
-                                <tr>
-                                  <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">&gt;3</th>
-                                  <td><input className='cocomo2_input' id="EO20" type="text" style={{ width: '100%' }} aria-label="EO simple complexity input"/></td>
-                                  <td><input className='cocomo2_input' id="EO21" type="text" style={{ width: '100%' }} aria-label="EO medium complexity input"/></td>
-                                  <td><input className='cocomo2_input' id="EO22" type="text" style={{ width: '100%' }} aria-label="EO high complexity input"/></td>
-                                </tr>
-                              </tbody>
+                                <caption className="visually-hidden">External Outputs complexity rating based on data elements and file types referenced</caption>
+                                <thead>
+                                    <tr>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">Data Elements</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">1-4 (Simple)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">5-19 (Medium)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">&gt;19 (Complex)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">0-1 File Types</th>
+                                        <td><input className='cocomo2_input' id="EO00" type="text" style={{ width: '100%' }} aria-label="EO simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EO01" type="text" style={{ width: '100%' }} aria-label="EO medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EO02" type="text" style={{ width: '100%' }} aria-label="EO high complexity input" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">2-3 File Types</th>
+                                        <td><input className='cocomo2_input' id="EO10" type="text" style={{ width: '100%' }} aria-label="EO simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EO11" type="text" style={{ width: '100%' }} aria-label="EO medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EO12" type="text" style={{ width: '100%' }} aria-label="EO high complexity input" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">&gt;3 File Types</th>
+                                        <td><input className='cocomo2_input' id="EO20" type="text" style={{ width: '100%' }} aria-label="EO simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EO21" type="text" style={{ width: '100%' }} aria-label="EO medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EO22" type="text" style={{ width: '100%' }} aria-label="EO high complexity input" /></td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </section>
-                          
+
                         <section className='leftColumnTable'>
-                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px'}}>Internal Logical Files (ILF)</h3>
+                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px' }}>Internal Logical Files (ILF) Complexity Matrix</h3>
                             <table border="1" aria-label="Internal logical files complexity matrix">
+                                <caption className="visually-hidden">Internal Logical Files complexity rating based on record types and data elements</caption>
                                 <thead>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">Record Types</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">1-19</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">20-50</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">&gt;50</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">Record Types</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">1-19 (Simple)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">20-50 (Medium)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">&gt;50 (Complex)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">1</th>
-                                        <td><input className='cocomo2_input' id="ILF00" type="text" style={{ width: '100%' }} aria-label="ILF simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="ILF01" type="text" style={{ width: '100%' }} aria-label="ILF medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="ILF02" type="text" style={{ width: '100%' }} aria-label="ILF high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">1 Data Element</th>
+                                        <td><input className='cocomo2_input' id="ILF00" type="text" style={{ width: '100%' }} aria-label="ILF simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="ILF01" type="text" style={{ width: '100%' }} aria-label="ILF medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="ILF02" type="text" style={{ width: '100%' }} aria-label="ILF high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">2-5</th>
-                                        <td><input className='cocomo2_input' id="ILF10" type="text" style={{ width: '100%' }} aria-label="ILF simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="ILF11" type="text" style={{ width: '100%' }} aria-label="ILF medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="ILF12" type="text" style={{ width: '100%' }} aria-label="ILF high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">2-5 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="ILF10" type="text" style={{ width: '100%' }} aria-label="ILF simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="ILF11" type="text" style={{ width: '100%' }} aria-label="ILF medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="ILF12" type="text" style={{ width: '100%' }} aria-label="ILF high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">&gt;5</th>
-                                        <td><input className='cocomo2_input' id="ILF20" type="text" style={{ width: '100%' }} aria-label="ILF simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="ILF21" type="text" style={{ width: '100%' }} aria-label="ILF medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="ILF22" type="text" style={{ width: '100%' }} aria-label="ILF high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">&gt;5 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="ILF20" type="text" style={{ width: '100%' }} aria-label="ILF simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="ILF21" type="text" style={{ width: '100%' }} aria-label="ILF medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="ILF22" type="text" style={{ width: '100%' }} aria-label="ILF high complexity input" /></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </section>
 
                         <section className='leftColumnTable'>
-                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px'}}>External Interface Files (EIF)</h3>
+                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px' }}>External Interface Files (EIF) Complexity Matrix</h3>
                             <table border="1" aria-label="External interface files complexity matrix">
+                                <caption className="visually-hidden">External Interface Files complexity rating based on record types and data elements</caption>
                                 <thead>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">Record Types</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">1-19</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">20-50</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">&gt;50</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">Record Types</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">1-19 (Simple)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">20-50 (Medium)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">&gt;50 (Complex)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">1</th>
-                                        <td><input className='cocomo2_input' id="EIF00" type="text" style={{ width: '100%' }} aria-label="EIF simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EIF01" type="text" style={{ width: '100%' }} aria-label="EIF medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EIF02" type="text" style={{ width: '100%' }} aria-label="EIF high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">1 Data Element</th>
+                                        <td><input className='cocomo2_input' id="EIF00" type="text" style={{ width: '100%' }} aria-label="EIF simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EIF01" type="text" style={{ width: '100%' }} aria-label="EIF medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EIF02" type="text" style={{ width: '100%' }} aria-label="EIF high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">2-5</th>
-                                        <td><input className='cocomo2_input' id="EIF10" type="text" style={{ width: '100%' }} aria-label="EIF simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EIF11" type="text" style={{ width: '100%' }} aria-label="EIF medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EIF12" type="text" style={{ width: '100%' }} aria-label="EIF high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">2-5 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="EIF10" type="text" style={{ width: '100%' }} aria-label="EIF simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EIF11" type="text" style={{ width: '100%' }} aria-label="EIF medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EIF12" type="text" style={{ width: '100%' }} aria-label="EIF high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">&gt;5</th>
-                                        <td><input className='cocomo2_input' id="EIF20" type="text" style={{ width: '100%' }} aria-label="EIF simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EIF21" type="text" style={{ width: '100%' }} aria-label="EIF medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EIF22" type="text" style={{ width: '100%' }} aria-label="EIF high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">&gt;5 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="EIF20" type="text" style={{ width: '100%' }} aria-label="EIF simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EIF21" type="text" style={{ width: '100%' }} aria-label="EIF medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EIF22" type="text" style={{ width: '100%' }} aria-label="EIF high complexity input" /></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </section>
 
                         <section className='leftColumnTable'>
-                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px'}}>External Inquiries (EQ)</h3>
+                            <h3 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white', padding: '10px' }}>External Inquiries (EQ) Complexity Matrix</h3>
                             <table border="1" aria-label="External inquiries complexity matrix">
+                                <caption className="visually-hidden">External Inquiries complexity rating based on file types and data elements</caption>
                                 <thead>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">File Types</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">1-4</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">5-19</th>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="col">&gt;19</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">File Types</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">1-4 (Simple)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">5-19 (Medium)</th>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="col">&gt;19 (Complex)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">0-1</th>
-                                        <td><input className='cocomo2_input' id="EQ00" type="text" style={{ width: '100%' }} aria-label="EQ simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EQ01" type="text" style={{ width: '100%' }} aria-label="EQ medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EQ02" type="text" style={{ width: '100%' }} aria-label="EQ high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">0-1 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="EQ00" type="text" style={{ width: '100%' }} aria-label="EQ simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EQ01" type="text" style={{ width: '100%' }} aria-label="EQ medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EQ02" type="text" style={{ width: '100%' }} aria-label="EQ high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">2-3</th>
-                                        <td><input className='cocomo2_input' id="EQ10" type="text" style={{ width: '100%' }} aria-label="EQ simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EQ11" type="text" style={{ width: '100%' }} aria-label="EQ medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EQ12" type="text" style={{ width: '100%' }} aria-label="EQ high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">2-3 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="EQ10" type="text" style={{ width: '100%' }} aria-label="EQ simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EQ11" type="text" style={{ width: '100%' }} aria-label="EQ medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EQ12" type="text" style={{ width: '100%' }} aria-label="EQ high complexity input" /></td>
                                     </tr>
                                     <tr>
-                                        <th style={{padding:'5px', backgroundColor:'#ccc' }} scope="row">&gt;3</th>
-                                        <td><input className='cocomo2_input' id="EQ20" type="text" style={{ width: '100%' }} aria-label="EQ simple complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EQ21" type="text" style={{ width: '100%' }} aria-label="EQ medium complexity input"/></td>
-                                        <td><input className='cocomo2_input' id="EQ22" type="text" style={{ width: '100%' }} aria-label="EQ high complexity input"/></td>
+                                        <th style={{ padding: '5px', backgroundColor: '#ccc' }} scope="row">&gt;3 Data Elements</th>
+                                        <td><input className='cocomo2_input' id="EQ20" type="text" style={{ width: '100%' }} aria-label="EQ simple complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EQ21" type="text" style={{ width: '100%' }} aria-label="EQ medium complexity input" /></td>
+                                        <td><input className='cocomo2_input' id="EQ22" type="text" style={{ width: '100%' }} aria-label="EQ high complexity input" /></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </section>
                     </article>
                 </section>
-                
-                <hr aria-hidden="true"/>
-                <hr aria-hidden="true"/>
-                
+
+                <hr aria-hidden="true" />
+                <hr aria-hidden="true" />
+
                 <section className="row">
                     <article className="col last3 cocomo2_col">
-                        <h2 className='cocomo2_heading' style={{backgroundColor:'green',borderRadius:'7px', color: 'white'}}>Scale Factors Affecting Exponent</h2>
+                        <h2 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white' }}>Scale Factors Affecting Exponent</h2>
                         <p>These factors determine the non-linear relationship between size and effort in the COCOMO II model.</p>
-                        
+
                         <div className="form-group">
                             <label htmlFor="prec">Novelty (PREC)</label>
                             <select id="prec" aria-describedby="precHelp">
@@ -400,7 +427,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="precHelp" className="form-text">Measures project team's experience with similar projects</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="Flex">Development flexibility (FLEX)</label>
                             <select id="Flex" aria-describedby="flexHelp">
@@ -413,7 +440,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="flexHelp" className="form-text">Measures flexibility in meeting specified requirements</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="Risk">Resolving Risks in the System Architecture (RESL)</label>
                             <select id="Risk" aria-describedby="riskHelp">
@@ -426,7 +453,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="riskHelp" className="form-text">Measures risk resolution in architecture and design</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="team">Team cohesion (TEAM)</label>
                             <select id="team" aria-describedby="teamHelp">
@@ -439,7 +466,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="teamHelp" className="form-text">Measures team's ability to work together effectively</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="pmat">Development process maturity level (PMAT)</label>
                             <select id="pmat" aria-describedby="pmatHelp">
@@ -452,14 +479,14 @@ const Cocomo2 = () => {
                             </select>
                             <small id="pmatHelp" className="form-text">Measures organizational process maturity</small>
                         </div>
-                        
-                        <h3 id="p" aria-live="polite"></h3>
+
+                        <h3 id="p" aria-live="polite">P Value: <span>{pValue}</span></h3>
                     </article>
-                    
+
                     <article className="col last3 cocomo2_col">
-                        <h2 className='cocomo2_heading' style={{backgroundColor:'green',borderRadius:'7px', color: 'white'}}>Early Architecture Model</h2>
+                        <h2 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white' }}>Early Architecture Model</h2>
                         <p>Estimates effort for projects where architectural design is a primary focus.</p>
-                        
+
                         <div className="form-group">
                             <label htmlFor="PERS">Personnel Capability (PERS)</label>
                             <select id="PERS" aria-describedby="persHelp">
@@ -472,7 +499,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="persHelp" className="form-text">Measures team capability and experience</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="RCPX">Product Reliability and Complexity (RCPX)</label>
                             <select id="RCPX" aria-describedby="rcpxHelp">
@@ -485,7 +512,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="rcpxHelp" className="form-text">Measures product reliability and complexity requirements</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="RUSE">Required Reusability (RUSE)</label>
                             <select id="RUSE" aria-describedby="ruseHelp">
@@ -497,7 +524,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="ruseHelp" className="form-text">Measures required software reusability</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="PDIF">Platform Difficulty (PDIF)</label>
                             <select id="PDIF" aria-describedby="pdifHelp">
@@ -509,7 +536,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="pdifHelp" className="form-text">Measures platform difficulty and volatility</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="PREX">Personnel Experience (PREX)</label>
                             <select id="PREX" aria-describedby="prexHelp">
@@ -522,7 +549,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="prexHelp" className="form-text">Measures team experience with similar projects</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="FCIL">Facilities (FCIL)</label>
                             <select id="FCIL" aria-describedby="fcilHelp">
@@ -535,7 +562,7 @@ const Cocomo2 = () => {
                             </select>
                             <small id="fcilHelp" className="form-text">Measures quality of development tools and environment</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="SCED">Required Schedule (SCED)</label>
                             <select id="SCED" aria-describedby="scedHelp">
@@ -547,24 +574,24 @@ const Cocomo2 = () => {
                             </select>
                             <small id="scedHelp" className="form-text">Measures schedule constraints and compression</small>
                         </div>
-                        
-                        <button type="submit" id="meda"   className="button-81 fpBtn" ref={medaBtnRef} aria-label="Calculate early architecture model">Calculate</button>
+
+                        <button type="submit" id="meda" className="button-81 fpBtn" ref={medaBtnRef} aria-label="Calculate early architecture model">Calculate</button>
                         <div className="results-section">
-                            <h3 id="jobResultMeda" aria-live="polite"></h3>
-                            <h3 id="timeResultMeda" aria-live="polite"></h3>
+                            <h3 id="jobResultMeda" aria-live="polite">{jobResultMeda}</h3>
+                            <h3 id="timeResultMeda" aria-live="polite">{timeResultMeda}</h3>
                         </div>
                     </article>
-                    
+
                     <article className="col last3 cocomo2_col">
-                        <h2 className='cocomo2_heading' style={{backgroundColor:'green',borderRadius:'7px', color: 'white'}}>Application Composition Model</h2>
+                        <h2 className='cocomo2_heading' style={{ backgroundColor: 'green', borderRadius: '7px', color: 'white' }}>Application Composition Model</h2>
                         <p>Estimates effort for projects using rapid application development and prototyping.</p>
-                        
+
                         <div className="form-group">
                             <label htmlFor="rusePr">Reuse Percentage (%RUSE):</label>
-                            <input className='cocomo2_input' id="rusePr" type="text" placeholder="0" aria-label="Reuse percentage"/>
+                            <input className='cocomo2_input' id="rusePr" type="text" placeholder="0" aria-label="Reuse percentage" />
                             <small className="form-text">Percentage of components being reused</small>
                         </div>
-                        
+
                         <div className="form-group">
                             <label htmlFor="exp">Experience of the team/developer</label>
                             <select id="exp" aria-describedby="expHelp">
@@ -576,53 +603,53 @@ const Cocomo2 = () => {
                             </select>
                             <small id="expHelp" className="form-text">Measures team experience with similar applications</small>
                         </div>
-                        
+
                         <fieldset>
                             <legend>Screen Forms</legend>
                             <div className="form-group">
                                 <label htmlFor="sS">Simple</label>
-                                <input className='cocomo2_input' id="sS" type="text" placeholder="0" aria-label="Number of simple screen forms"/>
+                                <input className='cocomo2_input' id="sS" type="text" placeholder="0" aria-label="Number of simple screen forms" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="mS">Medium</label>
-                                <input className='cocomo2_input' id="mS" type="text" placeholder="0" aria-label="Number of medium complexity screen forms"/>
+                                <input className='cocomo2_input' id="mS" type="text" placeholder="0" aria-label="Number of medium complexity screen forms" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="hS">Complex</label>
-                                <input className='cocomo2_input' id="hS" type="text" placeholder="0" aria-label="Number of complex screen forms"/>
+                                <input className='cocomo2_input' id="hS" type="text" placeholder="0" aria-label="Number of complex screen forms" />
                             </div>
                         </fieldset>
-                        
+
                         <fieldset>
                             <legend>Reports</legend>
                             <div className="form-group">
                                 <label htmlFor="sD">Simple</label>
-                                <input className='cocomo2_input' id="sD" type="text" placeholder="0" aria-label="Number of simple reports"/>
+                                <input className='cocomo2_input' id="sD" type="text" placeholder="0" aria-label="Number of simple reports" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="mD">Medium</label>
-                                <input className='cocomo2_input' id="mD" type="text" placeholder="0" aria-label="Number of medium complexity reports"/>
+                                <input className='cocomo2_input' id="mD" type="text" placeholder="0" aria-label="Number of medium complexity reports" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="hD">Complex</label>
-                                <input className='cocomo2_input' id="hD" type="text" placeholder="0" aria-label="Number of complex reports"/>
+                                <input className='cocomo2_input' id="hD" type="text" placeholder="0" aria-label="Number of complex reports" />
                             </div>
                         </fieldset>
-                        
+
                         <div className="form-group">
                             <label htmlFor="mod">Modules in 3rd generation languages</label>
-                            <input className='cocomo2_input' id="mod" type="text" placeholder="0" aria-label="Number of modules in 3GL"/>
+                            <input className='cocomo2_input' id="mod" type="text" placeholder="0" aria-label="Number of modules in 3GL" />
                             <small className="form-text">Number of modules written in 3GL like C, Java, etc.</small>
                         </div>
-                        
+
                         <div className="results-section">
-                            <h3 id="jobResultMdp" aria-live="polite"></h3>
-                            <h3 id="timeResultMdp" aria-live="polite"></h3>
-                        </div>
+                        <h3 id="jobResultMdp" aria-live="polite">{jobResultMdp}</h3>
+                        <h3 id="timeResultMdp" aria-live="polite">{timeResultMdp}</h3>
+                    </div>
                     </article>
                 </section>
             </main>
-        </div>       
+        </div>
     )
 }
 

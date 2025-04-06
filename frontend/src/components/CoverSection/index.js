@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Video from '../../videos/video.mp4';
 import {
   CoverContainer,
@@ -6,19 +6,10 @@ import {
   VideoBg,
   CoverContent,
   CoverH1,
-  CoverP,
-  CoverBtnWrapper,
-  Button,
-  ArrowForward,
-  ArrowRight
+  CoverP
 } from './CoverElements';
 
 const CoverSection = () => {
-  const [hover, setHover] = useState(false);
-
-  const onHover = () => {
-    setHover(!hover);
-  };
 
   return (
     <CoverContainer>
