@@ -45,10 +45,12 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+  "puppeteer": "^19.7.1"
+},
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build && npm run postbuild",
-  "postbuild": "react-snap",
   "test": "react-scripts test",
   "eject": "react-scripts eject"
 },
@@ -72,13 +74,12 @@
   },
 "reactSnap": {
   "inlineCss": true,
-  "skipThirdPartyRequests": true,
-  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
-  "concurrency": 1,
-  "source": "build",
-  "minifyHtml": {
-    "collapseWhitespace": true,
-    "removeComments": true
-  }
+  "puppeteerExecutablePath": "/usr/bin/chromium",
+  "puppeteerArgs": [
+    "--no-sandbox",
+    "--disable-setuid-sandbox",
+    "--disable-dev-shm-usage"
+  ],
+  "source": "build"
 }
 }
