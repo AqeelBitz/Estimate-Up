@@ -44,7 +44,7 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },
-  "homepage": ".",
+"homepage": "https://estimate-up.vercel.app/",
   "build": {
     "baseUrl": "./"
   },
