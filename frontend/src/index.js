@@ -1,26 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { hydrate, render } from 'react-dom'; // old school, but react-snap needs it
 import './index.css';
 import './style.css';
 import App from './App';
 
-const container = document.getElementById('root');
+const rootElement = document.getElementById('root');
 
-// Hydrate if prerendered HTML exists
-if (container?.hasChildNodes()) {
-  ReactDOM.hydrateRoot(
-    container,
+if (rootElement.hasChildNodes()) {
+  hydrate(
     <React.StrictMode>
       <App />
-    </React.StrictMode>
+    </React.StrictMode>,
+    rootElement
   );
-} 
-// Normal render for development
-else {
-  const root = ReactDOM.createRoot(container);
-  root.render(
+} else {
+  render(
     <React.StrictMode>
       <App />
-    </React.StrictMode>
+    </React.StrictMode>,
+    rootElement
   );
 }

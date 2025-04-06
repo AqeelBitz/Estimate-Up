@@ -1,10 +1,14 @@
 {
-    "headers": [
+    "version": 2,
+    "builds": [
       {
-        "source": "/(.*)",
-        "headers": [
-          { "key": "X-Robots-Tag", "value": "all" }
-        ]
+        "src": "package.json",
+        "use": "@vercel/static-build"
       }
-    ]
-  }
+    ],
+    "build": {
+      "env": {
+        "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true"
+      }
+    }
+}
