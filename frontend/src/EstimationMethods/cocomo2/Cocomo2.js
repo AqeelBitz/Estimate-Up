@@ -199,7 +199,7 @@ const Cocomo2 = () => {
                             <input className='cocomo2_input' id="fp14" type="number" min="0" max="5" aria-label="Change ease complexity rating" /><br />
                         </div>
                         
-                        <button type="submit" role="button" className="fpBtn" ref={fpBtnRef} aria-label="Calculate function points">Calculate</button>
+                        <button type="submit"   className="fpBtn" ref={fpBtnRef} aria-label="Calculate function points">Calculate</button>
                         <div className="results-section" style={{ padding:'5px', marginTop:'5px'}}>
                             <h3 id="fi" aria-live="polite"></h3>
                             <h3 id="ufp" aria-live="polite"></h3>
@@ -548,7 +548,7 @@ const Cocomo2 = () => {
                             <small id="scedHelp" className="form-text">Measures schedule constraints and compression</small>
                         </div>
                         
-                        <button type="submit" id="meda" role="button" className="button-81 fpBtn" ref={medaBtnRef} aria-label="Calculate early architecture model">Calculate</button>
+                        <button type="submit" id="meda"   className="button-81 fpBtn" ref={medaBtnRef} aria-label="Calculate early architecture model">Calculate</button>
                         <div className="results-section">
                             <h3 id="jobResultMeda" aria-live="polite"></h3>
                             <h3 id="timeResultMeda" aria-live="polite"></h3>

@@ -1,93 +1,85 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-
 const FunctionF = () => {
+  const UFP = () => {
+    const x = Number(document.getElementById("wf").value);
+    let temp1, temp2, temp3, temp4, temp5;
 
-    function UFP() {
-        var x = Number(document.getElementById("wf").value)
-        if (x === 1) {
-            var temp1 = 3
-            var temp2 = 4
-            var temp3 = 3
-            var temp4 = 7
-            var temp5 = 5
-        }
-        else if (x === 2) {
-            var temp1 = 4
-            var temp2 = 5
-            var temp3 = 4
-            var temp4 = 10
-            var temp5 = 7
-        }
-        else {
-            if (x === 3) {
-                var temp1 = 6
-                var temp2 = 7
-                var temp3 = 6
-                var temp4 = 15
-                var temp5 = 10
-            }
-        }
-        var p = Number(document.getElementById("in").value)
-        var q = Number(document.getElementById("out").value)
-        var r = Number(document.getElementById("inq").value)
-        var s = Number(document.getElementById("files").value)
-        var t = Number(document.getElementById("ext_int").value)
-
-        var UFP = ((temp1 * p) + (temp2 * q) + (temp3 * r) + (temp4 * s) + (temp5 * t))
-        document.getElementById("UFP").value = UFP
-
+    if (x === 1) {
+      temp1 = 3;
+      temp2 = 4;
+      temp3 = 3;
+      temp4 = 7;
+      temp5 = 5;
+    } else if (x === 2) {
+      temp1 = 4;
+      temp2 = 5;
+      temp3 = 4;
+      temp4 = 10;
+      temp5 = 7;
+    } else if (x === 3) {
+      temp1 = 6;
+      temp2 = 7;
+      temp3 = 6;
+      temp4 = 15;
+      temp5 = 10;
     }
 
-    function func() {
-        const questions = [
-            "Does the system require reliable backup and recovery?",
-            "Are data communications required?",
-            "Are there distributed processing functions?",
-            "Is performance critical?",
-            "Will the system run in an existing, heavily utilized operational environment?",
-            "Does the system require online data entry?",
-            "Does the online data entry require the input transaction to be built over multiple screens or operations?",
-            "Are the inputs, outputs, files, or inquiries complex?",
-            "Are the master files updated?",
-            "Is the internal processing complex?",
-            "Is the code designed to be reusable?",
-            "Are conversion and installation included in the design?",
-            "Is the system designed for multiple installations in different organizations?",
-            "Is the application designed to facilitate change and ease of use by users?"
-        ];
+    const p = Number(document.getElementById("in").value);
+    const q = Number(document.getElementById("out").value);
+    const r = Number(document.getElementById("inq").value);
+    const s = Number(document.getElementById("files").value);
+    const t = Number(document.getElementById("ext_int").value);
 
-        var sum = 0;
+    const calculatedUFP = ((temp1 * p) + (temp2 * q) + (temp3 * r) + (temp4 * s) + (temp5 * t));
+    document.getElementById("UFP").value = calculatedUFP;
+  };
 
-        for (var i = 0; i < questions.length; i++) {
-            var count = i + 1;
-            var value = Number(prompt(`[${count}/15] ${questions[i]} (0-5)`));
+  const func = () => {
+    const questions = [
+      "Does the system require reliable backup and recovery?",
+      "Are data communications required?",
+      "Are there distributed processing functions?",
+      "Is performance critical?",
+      "Will the system run in an existing, heavily utilized operational environment?",
+      "Does the system require online data entry?",
+      "Does the online data entry require the input transaction to be built over multiple screens or operations?",
+      "Are the inputs, outputs, files, or inquiries complex?",
+      "Are the master files updated?",
+      "Is the internal processing complex?",
+      "Is the code designed to be reusable?",
+      "Are conversion and installation included in the design?",
+      "Is the system designed for multiple installations in different organizations?",
+      "Is the application designed to facilitate change and ease of use by users?"
+    ];
 
-            if (isNaN(value) || value < 0 || value > 5) {
-                alert("Please enter a value between 0 and 5 for each question.");
-                return;
-            }
+    let sum = 0;
 
-            sum += value;
-        }
+    for (let i = 0; i < questions.length; i++) {
+      const count = i + 1;
+      const value = Number(prompt(`[${count}/15] ${questions[i]} (0-5)`));
 
-        document.getElementById("res").value = sum;
+      if (isNaN(value) || value < 0 || value > 5) {
+        alert("Please enter a value between 0 and 5 for each question.");
+        return;
+      }
+
+      sum += value;
     }
 
+    document.getElementById("res").value = sum;
+  };
 
+  const getffp = () => {
+    const temp = Number(document.getElementById("res").value);
+    const perm = Number(document.getElementById("UFP").value);
+    const result = (perm * (0.65 + (0.01 * temp)));
 
-    function getffp() {
-
-        var temp = Number(document.getElementById("res").value)
-        var perm = Number(document.getElementById("UFP").value)
-        var result = (perm * (0.65 + (0.01 * temp)))
-
-        document.getElementById("F_P").value = result
-
-    }
+    document.getElementById("F_P").value = result;
+  };
     return (
         <div>
             <Helmet>
@@ -201,7 +193,7 @@ const FunctionF = () => {
                         <input type="text" id="ext_int" placeholder="Number of External Interfaces" />
                     </p>
                 </div><br />
-                <button className="button-43" role="button" onClick={UFP}> click me to get UFP</button>
+                <button className="button-43"   onClick={UFP}> click me to get UFP</button>
                 <br /><br />
                 <div style={{ color: '#00fa00' }}>
                     UFP=<input type="text" id="UFP" />
@@ -222,13 +214,13 @@ const FunctionF = () => {
                     <em><strong style={{ color: 'green' }}>--Assign a value of importance to each question. Questions will be asked in the prompt window. Write answers only within 0 to 5 where Zero being of low importance and 5 being of high importance.--</strong></em>
                     <strong><h3>Click on the below button for adding the complexity factors</h3></strong>
                     <p>
-                        <button className="button-43 res" role="button" onClick={func}>CLICK HERE TO OPEN THE PROMPT WINDOW</button>
+                        <button className="button-43 res"   onClick={func}>CLICK HERE TO OPEN THE PROMPT WINDOW</button>
                     </p>
                     <p style={{ color: '#00fa00' }}>
                         D.I=<input type="text" id="res" className="res" />
                     </p>
                 </div>
-                <button className="button-43" role="button" onClick={getffp} >CALCULATE FP</button><br />
+                <button className="button-43"   onClick={getffp} >CALCULATE FP</button><br />
                 <br /><input type="text" id="F_P" placeholder="FP is " readOnly />
                 <br /><br />
             </div>

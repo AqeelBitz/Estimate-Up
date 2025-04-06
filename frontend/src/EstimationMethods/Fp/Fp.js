@@ -188,7 +188,7 @@ const FunctionF = () => {
                         <input type="text" id="ext_int" placeholder="Number of External Interfaces" />
                     </p>
                 </div><br />
-                <button className="button-43" role="button" onClick={UFP}> click me to get UFP</button>
+                <button className="button-43"   onClick={UFP}> click me to get UFP</button>
                 <br /><br />
                 <div style={{ color: '#00fa00' }}>
                     UFP=<input type="text" id="UFP" />
@@ -210,13 +210,13 @@ const FunctionF = () => {
                     <em><strong style={{ color: 'green' }}>--Assign a value of importance to each question. Questions will be asked in the promppt window. write answers only within 0 to 5 where Zero being of low importance and 5 being of high importance.--</strong></em>
                     <strong><h3>Click on the below button for adding the complexity factors</h3></strong>
                     <p>
-                        <button className="button-43 res" role="button" onClick={func}>CLICK HERE TO OPEN THE PROMPT WINDOW</button>
+                        <button className="button-43 res"   onClick={func}>CLICK HERE TO OPEN THE PROMPT WINDOW</button>
                     </p>
                     <p style={{ color: '#00fa00' }}>
                         D.I=<input type="text" id="res" className="res" />
                     </p>
                 </div>
-                <button className="button-43" role="button" onClick={getffp} >CALCULATE FP</button><br />
+                <button className="button-43"   onClick={getffp} >CALCULATE FP</button><br />
                 <br /><input type="text" id="F_P" placeholder="FP is " />
                 <br /><br />
             </div>
